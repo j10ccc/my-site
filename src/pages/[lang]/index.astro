@@ -1,0 +1,20 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+export interface Props {
+  lang: "zh-cn" | "en";
+}
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: "zh-cn" }, props: { lang: "zh-cn" } },
+    { params: { lang: "en" }, props: { lang: "en" } },
+  ];
+}
+
+const { lang } = Astro.props;
+---
+
+<BaseLayout title="Home" lang={lang}>
+  <pre>Hello world</pre>
+</BaseLayout>

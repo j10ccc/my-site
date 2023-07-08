@@ -1,0 +1,35 @@
+---
+export interface Props {
+  lang: string;
+}
+
+interface Route {
+  title: string;
+  link: string;
+}
+
+const { lang } = Astro.props;
+const linkPrefix = `/${lang}`;
+const routes: Route[] = [
+  { title: "Home", link: "/" },
+  { title: "About", link: "/about" },
+  { title: "Blog", link: "/blog" },
+  { title: "Tags", link: "/tags" }
+];
+---
+
+<div class="navigation">
+  {routes.map(route => (
+    <a href={`${linkPrefix}${route.link}`}>{ route.title }</a>
+  ))}
+</div>
+
+<style lang="less">
+.navigation {
+  display: flex;
+  gap: 8px;
+  a {
+    text-decoration: none;
+  }
+}
+</style>

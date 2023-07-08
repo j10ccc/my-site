@@ -1,0 +1,38 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Social from "@components/Social.astro";
+
+export interface Props {
+  lang: "zh-cn" | "en";
+}
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: "zh-cn" }, props: { lang: "zh-cn" } },
+    { params: { lang: "en" }, props: { lang: "en" } },
+  ];
+}
+
+const { lang } = Astro.props;
+
+const pageTitle = "About Me";
+
+const identity = {
+  firstName: "J10c",
+  country: "China",
+  city: "Hangzhou",
+  occupation: "Student",
+  hobbies: ["photography", "birdwatching", "baseball"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+---
+
+<BaseLayout title={pageTitle} lang={lang}>
+  <Social />
+  <h2>... and my new Astro site!</h2>
+  <p>My skills are:</p>
+  <ul>
+    {skills.map((skill) => <li class="skill">{skill}</li>)}
+  </ul>
+</BaseLayout>

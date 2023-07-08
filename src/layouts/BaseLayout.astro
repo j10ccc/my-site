@@ -1,0 +1,26 @@
+---
+import Header from "@components/Header.astro";
+import "@styles/global.less";
+
+export interface Props {
+  title?: string;
+  lang: "en" | "zh-cn";
+}
+
+const { title = "Default Title", lang } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Header title={title} lang={lang} />
+    <slot />
+  </body>
+</html>
