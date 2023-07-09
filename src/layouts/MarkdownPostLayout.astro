@@ -12,7 +12,8 @@ const { frontmatter } = Astro.props;
 const pageTitle = `Post`
 ---
 
-<BaseLayout title={`${frontmatter.title} - ${pageTitle}`} lang="zh-cn">
+<BaseLayout title={pageTitle} lang="zh-cn">
+  <h1>{ frontmatter.title }</h1>
   <p>Published on: {new Date(frontmatter.pubDate).toLocaleDateString()}</p>
   <p>Written by {frontmatter.author}</p>
   <main class="markdown">

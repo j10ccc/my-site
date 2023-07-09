@@ -5,7 +5,7 @@
 ## TODOs
 
 - [ ] light Christmas theme
-- [ ] Monorepo
 - [ ] fontsource
 - [ ] rss
 - [ ] i18n
+- [ ] markdown emoji support

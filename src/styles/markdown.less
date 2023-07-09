@@ -1,5 +1,72 @@
+@import url(./theme.less);
+
 .markdown {
-  h1 {
-    font-size: 1.6em
+  font-weight: 400;
+  color: @stone-font-black;
+  
+  ::selection {
+    background-color: rgba(@stone-red-2, .4);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: @font-serif;
+  }
+  ul, ol {
+    padding-inline-start: 30px;
+  }
+  a {
+    color: @stone-red-5;
+  }
+  pre {
+    padding: 12px;
+    border-bottom-left-radius: 8px;
+  }
+  blockquote {
+    color: rgba(@stone-font-black, .8) !important;
+    margin: 0;
+    padding: 8px 18px;
+    background-color: rgba(@stone-red-1, .4);
+    border-left: 3px solid @stone-red-3;
+    box-shadow: @stone-shadow;
+    p {
+      margin: 0 0 4px 0;
+    }
+  }
+  code:not(pre code) {
+    padding: 2px 4px;
+    margin: 0 4px;
+    border-radius: 4px;
+    background-color: @stone-red-1;
+    color: @stone-red-6;
+  }
+  hr {
+    border: 0;
+    border-top: 3px solid @stone-red-1;
+  }
+  img {
+    max-width: 35%;
+  }
+  table {
+    box-shadow: @stone-shadow;
+    border-spacing: 0;
+    td {
+      padding: 5px 15px;
+    }
+    thead {
+      tr {
+        th {
+          padding: 8px;
+          border-bottom: 3px solid @stone-red-2;
+        }
+      }
+    }
+    tbody {
+      tr:nth-child(odd) {
+        background-color: rgba(@stone-red-1, .4);
+        td {
+          border-bottom: 2px solid @stone-red-1;
+        }
+      }
+    }
   }
 }
