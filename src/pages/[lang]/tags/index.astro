@@ -2,6 +2,7 @@
 import getTags from "@utils/getTags";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import '@fontsource/crete-round';
 
 export interface Props {
 	lang: "zh-cn" | "en"
@@ -28,18 +29,19 @@ const pageTitle = "Tag Index";
 ---
 
 <BaseLayout title={pageTitle} lang={lang}>
-  <div class="tags">
-    {tags.map((tag) => (
-      <div class="tag"><a href={`/${lang}/tags/${tag}`}>{tag}</a></div>
-    ))}
-  </div>
+  <main>
+    <div class="tags">
+      {tags.map((tag) => (
+        <div class="tag"><a href={`/${lang}/tags/${tag}`}>{tag.toUpperCase()}</a></div>
+      ))}
+    </div>
+  </main>
 </BaseLayout>
 
 <style lang="less">
-@redColor: red;
-@redBg: rgba(red, .2);
-@greenColor: green;
-@greenBg: rgba(green, .2);
+main {
+  margin-top: 16px;
+}
 
 .tags {
   display: flex;
@@ -49,18 +51,19 @@ const pageTitle = "Tag Index";
 .tag {
   margin: 0.25em;
   border-radius: 1rem;
-  padding: .1em .8em;
+  padding: 2px .8em;
   font-size: 1.15em;
-  background-color: @redBg;
-  transition: .5s all;
+  background-color: var(--stone-red-1);
+  transition: .2s all;
   a {
-    color: @redColor;
+    font-family: 'Crete Round', sans-serif;
+    color: var(--stone-red-6);
     font-size: 1rem;
     text-decoration: none;
     transition: .5s all;
   }
   &:hover {
-    background-color: @redColor;
+    background-color: var(--stone-red-6);
     a {
       color: white;
     }
