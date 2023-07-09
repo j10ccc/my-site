@@ -8,15 +8,62 @@ export interface Props {
 }
 
 const { frontmatter } = Astro.props;
+const { lang } = Astro.params;
 
-const pageTitle = `Post`
+const pageTitle = "Post"
 ---
 
-<BaseLayout title={pageTitle} lang="zh-cn">
-  <h1>{ frontmatter.title }</h1>
-  <p>Published on: {new Date(frontmatter.pubDate).toLocaleDateString()}</p>
-  <p>Written by {frontmatter.author}</p>
+<BaseLayout title={pageTitle} lang={ lang as "en" | "zh-cn"}>
+  <h1 class="post-title">{ frontmatter.title }</h1>
+  <div class="post-meta">
+    <span class="date">{ new Date(frontmatter.pubDate).toLocaleDateString(lang) }</span>
+    <span>{ frontmatter.author }</span>
+    <span style="flex: auto"></span>
+    <div class="tags">
+      { frontmatter.tags?.map(tag => (
+        <span class="tag">
+          <a href={`/${lang}/tags/${tag}`}> {tag.toUpperCase()} </a>
+        </span>
+      ))}
+    </div>
+  </div>
   <main class="markdown">
     <slot />
   </main>
 </BaseLayout>
+
+<style lang="less">
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .9rem;
+  margin-bottom: 24px;
+  .date {
+    color: #00000088
+  }
+  .tags {
+    display: flex;
+    gap: 4px;
+    .tag {
+      padding: 2px 0;
+      border-radius: 6px;
+      transition: .3s all;
+      a {
+        color: #000;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      &:hover {
+        background-color: var(--stone-green-1);
+      }
+    }
+  }
+}
+.post-title {
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-family: var(--font-serif);
+}
+</style>

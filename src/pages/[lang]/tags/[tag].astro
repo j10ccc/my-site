@@ -1,8 +1,8 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
+import BaseLayout from "@layouts/BaseLayout.astro";
 import type { Post } from "@types/post";
 import getTags from "@utils/getTags";
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 import { languages } from "@i18n/ui";
 
 export interface Props {
@@ -11,7 +11,7 @@ export interface Props {
 
 export async function getStaticPaths() {
   const allPosts = (await getCollection("blog")).map(page => {
-    const [, ...slug] = page.slug.split('/');
+    const [, ...slug] = page.slug.split("/");
     return {
       meta: page.data,
       url: slug.join("/"),

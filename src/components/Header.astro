@@ -1,8 +1,9 @@
 ---
 import Navigation from "./Navigation.astro";
+import "@fontsource/ibm-plex-sans/500.css";
 
 export interface Props {
-  title: string;
+  title?: string;
   lang: string;
 }
 
@@ -11,7 +12,7 @@ const { title, lang } = Astro.props;
 
 <header class="header">
   <div class="container">
-    <a href="/" class="logo">{ title }</a>
+    { title && <a href="/" class="logo">{ title }</a> }
     <div class="auto"></div>
     <Navigation lang={lang} />
   </div>
@@ -33,6 +34,7 @@ const { title, lang } = Astro.props;
     font-weight: 500;
     font-size: 1.8rem;
     margin: 0;
+    font-family: "IBM Plex Sans", sans-serif;
   }
 }
 </style>

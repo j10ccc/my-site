@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import "@fontsource/ibm-plex-sans/500.css";
 
 export interface Props {
   lang: "zh-cn" | "en";
@@ -15,6 +16,18 @@ export async function getStaticPaths() {
 const { lang } = Astro.props;
 ---
 
-<BaseLayout title="Home" lang={lang}>
-  <pre>Hello world</pre>
+<BaseLayout lang={lang}>
+  <div class="hero">
+    <h1> Hello, </h1>
+    <h1> I'm J10c </h1>
+  </div>
 </BaseLayout>
+
+<style lang="less">
+	.hero {
+		h1 {
+	    font-family: "IBM Plex Sans", sans-serif;
+			margin: 0;
+		}
+	}
+</style>
