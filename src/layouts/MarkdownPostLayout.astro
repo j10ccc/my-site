@@ -1,0 +1,21 @@
+---
+import type { Meta } from "@types/post";
+import BaseLayout from "./BaseLayout.astro";
+import "@styles/markdown.less";
+
+export interface Props {
+  frontmatter: Meta
+}
+
+const { frontmatter } = Astro.props;
+
+const pageTitle = `Post`
+---
+
+<BaseLayout title={`${frontmatter.title} - ${pageTitle}`} lang="zh-cn">
+  <p>Published on: {new Date(frontmatter.pubDate).toLocaleDateString()}</p>
+  <p>Written by {frontmatter.author}</p>
+  <main class="markdown">
+    <slot />
+  </main>
+</BaseLayout>

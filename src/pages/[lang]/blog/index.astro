@@ -1,0 +1,37 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PostPreiew from "@components/PostPreiew.astro";
+import { getCollection } from "astro:content";
+
+export interface Props {
+	lang: "zh-cn" | "en"
+}
+
+export async function getStaticPaths() {
+	return [
+		{ params: { lang: "zh-cn" }, props: { lang: "zh-cn"} },
+		{ params: { lang: "en" }, props: { lang: "en"} }
+	]
+}
+
+const allPosts = (await getCollection("blog")).map(page => {
+  const [_, ...slug] = page.slug.split('/');
+  return {
+    meta: page.data,
+    url: `blog/${slug.join("/")}`
+  }
+});
+
+const { lang } = Astro.props;
+
+---
+
+<BaseLayout title="Blog" lang={ lang }>
+  <p>This is where I will post about my journey learning Astro.</p>
+
+  <ul>
+    {allPosts.map((post) => (
+      <PostPreiew post={post} />
+    ))}
+  </ul>
+</BaseLayout>

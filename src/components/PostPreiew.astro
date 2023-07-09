@@ -1,0 +1,18 @@
+---
+import type { Post } from "@types/post";
+
+export interface Props {
+  post: Post
+}
+
+const { post } = Astro.props;
+---
+
+<div class="post-preview">
+  <div class="post-title">
+    <a href={post.url}>
+      { post.meta.title }
+    </a>
+  </div>
+  <div class="post-date">{ post.meta.pubDate }</div>
+</div>
