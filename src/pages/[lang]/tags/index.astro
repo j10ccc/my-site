@@ -1,0 +1,69 @@
+---
+import getTags from '@utils/getTags';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection } from "astro:content";
+
+export interface Props {
+	lang: "zh-cn" | "en"
+}
+
+export async function getStaticPaths() {
+	return [
+		{ params: { lang: "zh-cn" }, props: { lang: "zh-cn"} },
+		{ params: { lang: "en" }, props: { lang: "en"} }
+	]
+}
+
+const allPosts = (await getCollection("blog")).map(page => {
+  const [_, ...slug] = page.slug.split('/');
+  return {
+    meta: page.data,
+    url: slug.join("/")
+  }
+});
+
+const tags = getTags(allPosts);
+const { lang } = Astro.props;
+const pageTitle = "Tag Index";
+---
+
+<BaseLayout title={pageTitle} lang={lang}>
+  <div class="tags">
+    {tags.map((tag) => (
+      <div class="tag"><a href={`/${lang}/tags/${tag}`}>{tag}</a></div>
+    ))}
+  </div>
+</BaseLayout>
+
+<style lang="less">
+@redColor: red;
+@redBg: rgba(red, .2);
+@greenColor: green;
+@greenBg: rgba(green, .2);
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+.tag {
+  margin: 0.25em;
+  border-radius: 1rem;
+  padding: .1em .8em;
+  font-size: 1.15em;
+  background-color: @redBg;
+  transition: .5s all;
+  a {
+    color: @redColor;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: .5s all;
+  }
+  &:hover {
+    background-color: @redColor;
+    a {
+      color: white;
+    }
+  }
+}
+</style>
