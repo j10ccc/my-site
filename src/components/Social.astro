@@ -1,0 +1,54 @@
+---
+import "@fontsource/crete-round";
+import type { Languages } from "@types/i18n";
+import { useTranslations } from "@hooks/i18n/useTranslations";
+
+export interface Props {
+  lang: Languages
+}
+
+interface Social {
+  label?: string;
+  link: string;
+  color: `#${any}`;
+}
+
+const socialMedias: Social[] = [
+  { label: "github", link: "https://blog.j10ccc.xyz", color: "#202328" },
+  { label: "juejin", link: "https://juejin.cn/user/4367696392367191", color: "#3f7ef7" },
+]
+
+const { lang } = Astro.props;
+
+const t = useTranslations(lang);
+
+---
+
+<div class="social">
+  { socialMedias.map(item => (
+    <a class="item" href={item.link} style={{ "--icon-color": item.color }}>
+      { item.label && <span>{ item.label }</span> }
+    </a>
+  ))}
+</div>
+
+<style lang="less">
+.social {
+  display: flex;
+  margin-top: 12px;
+  font-family: 'Crete Round', sans-serif;
+  gap: 8px;
+  .item {
+    text-decoration: none;
+    color: var(--stone-red-8);
+    transition: .2s all;
+    border-radius: 4px;
+    background-color: var(--stone-red-1);
+    &:hover {
+      color: var(--stone-white);
+      background-color: var(--icon-color);
+    }
+  }
+}
+
+</style>

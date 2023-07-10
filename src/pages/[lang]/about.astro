@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Social from "@components/Social.astro";
+import type { Languages } from "@types/i18n";
 
 export interface Props {
-  lang: "zh-cn" | "en";
+	lang: Languages;
 }
 
 export async function getStaticPaths() {
@@ -17,19 +18,10 @@ const { lang } = Astro.props;
 
 const pageTitle = "About Me";
 
-const identity = {
-  firstName: "J10c",
-  country: "China",
-  city: "Hangzhou",
-  occupation: "Student",
-  hobbies: ["photography", "birdwatching", "baseball"],
-};
-
 const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 ---
-
-<BaseLayout title={pageTitle} lang={lang}>
-  <Social />
+<BaseLayout title={ pageTitle } lang={lang}>
+  <Social lang={lang} />
   <h2>... and my new Astro site!</h2>
   <p>My skills are:</p>
   <ul>

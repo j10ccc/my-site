@@ -1,10 +1,14 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import "@fontsource/ibm-plex-sans/500.css";
+import "@fontsource/ibm-plex-sans/400.css";
 import { getCollection } from "astro:content";
+import { useTranslations } from "@hooks/i18n/useTranslations";
+import Social from "@components/Social.astro";
+import type { Languages } from "@types/i18n";
 
 export interface Props {
-  lang: "zh-cn" | "en";
+  lang: Languages;
 }
 
 export async function getStaticPaths() {
@@ -31,12 +35,21 @@ const postSlice = (await getCollection("blog"))
   .slice(0, 5);
 
 const projectSlice: any[] = [];
+
+const t = useTranslations(lang);
+
 ---
 
 <BaseLayout lang={lang}>
   <div class="hero">
     <h1>Hello,</h1>
-    <h1>I'm J10c</h1>
+    <h1>I'm {t("identify.name")}.</h1>
+    <div class="tags">
+      <p>{ t("identify.introduction") }</p>
+      <p>{ t("identify.occupation") }</p>
+      <p>{ t("identify.hobby") }</p>
+    </div>
+    <Social lang={lang} />
   </div>
 
   { projectSlice.length !== 0 && (
@@ -70,16 +83,24 @@ const projectSlice: any[] = [];
 </BaseLayout>
 
 <style lang="less">
-h1, h2 {
+h1, h2, p, a {
   font-family: "IBM Plex Sans", sans-serif;
 }
 .hero {
+  margin-top: 24px;
   h1 {
     margin: 0;
+  }
+  .tags {
+    margin-top: 16px;
+    p {
+      margin: 4px 0;
+    }
   }
 }
 .showcase {
   h2 {
+    margin-top: 32px;
     margin-bottom: 12px;
     transition: 0.3s all;
     border-radius: 4px;
@@ -96,8 +117,6 @@ h1, h2 {
     grid-template-columns: 1fr;
     margin: 0 4px;
     gap: 12px;
-    font-family: "IBM Plex Sans", sans-serif;
-
     a {
       color: var(--stone-font-black);
       font-weight: 500;
