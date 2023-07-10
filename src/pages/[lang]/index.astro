@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import "@fontsource/ibm-plex-sans/500.css";
+import { getCollection } from "astro:content";
 
 export interface Props {
   lang: "zh-cn" | "en";
@@ -14,20 +15,105 @@ export async function getStaticPaths() {
 }
 
 const { lang } = Astro.props;
+
+const postSlice = (await getCollection("blog"))
+  .map((page) => {
+    const [_, ...slug] = page.slug.split("/");
+    return {
+      meta: page.data,
+      url: `blog/${slug.join("/")}`,
+    };
+  })
+  .sort(
+    (a, b) =>
+      new Date(b.meta.pubDate).getTime() - new Date(a.meta.pubDate).getTime()
+  )
+  .slice(0, 5);
+
+const projectSlice: any[] = [];
 ---
 
 <BaseLayout lang={lang}>
   <div class="hero">
-    <h1> Hello, </h1>
-    <h1> I'm J10c </h1>
+    <h1>Hello,</h1>
+    <h1>I'm J10c</h1>
   </div>
+
+  {
+    projectSlice.length !== 0 && (
+      <section class="showcase">
+        <h2>Pinned Projects</h2>
+        <div class="grid" />
+      </section>
+    )
+  }
+
+  {
+    postSlice.length !== 0 && (
+      <section class="showcase">
+        <a href="blog">
+          <h2>Latest Posts</h2>
+        </a>
+        <div class="grid">
+          {postSlice.map((post) => (
+            <a href={post.url}>
+              <div class="item">
+                <span class="title">{post.meta.title}</span>
+                <span class="date">
+                  {new Date(post.meta.pubDate).toLocaleDateString(lang)}
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
 </BaseLayout>
 
 <style lang="less">
-	.hero {
-		h1 {
-	    font-family: "IBM Plex Sans", sans-serif;
-			margin: 0;
-		}
-	}
+h1, h2 {
+  font-family: "IBM Plex Sans", sans-serif;
+  margin: 0;
+}
+
+.showcase {
+  h2 {
+    margin-bottom: 12px;
+    transition: 0.3s all;
+    border-radius: 4px;
+    &:hover {
+      background-color: var(--stone-red-1);
+    }
+  }
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 4px;
+    gap: 12px;
+    font-family: "IBM Plex Sans", sans-serif;
+
+    a {
+      color: var(--stone-font-black);
+      font-weight: 500;
+      .item {
+        display: flex;
+        justify-content: space-between;
+        padding: 4px 0;
+        border-radius: 4px;
+        transition: 0.3s all;
+        &:hover {
+          background-color: var(--stone-red-1);
+        }
+        .date {
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+}
 </style>
