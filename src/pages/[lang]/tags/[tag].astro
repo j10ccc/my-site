@@ -1,10 +1,10 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import type { Post } from "@types/post";
+import type { Post } from "@interfaces/post";
 import getTags from "@utils/getTags";
 import { getCollection } from "astro:content";
 import { languages } from "@i18n/ui";
-import type { Languages } from "@types/i18n";
+import type { Languages } from "@interfaces/i18n";
 
 export interface Props {
   posts: Post[];

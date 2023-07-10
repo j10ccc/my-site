@@ -7,7 +7,8 @@
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
       "@styles/*": ["src/styles/*"],
-      "@types/*": ["src/types/*"],
+      "@/types/*": ["src/types/*"],
+      "@interfaces/*": ["src/interfaces/*"],
       "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
       "@i18n/*": ["src/i18n/*"]

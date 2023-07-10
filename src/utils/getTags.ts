@@ -1,4 +1,4 @@
-import type { Post } from "@types/post";
+import type { Post } from "@interfaces/post";
 
 const getTags = (allPosts: Post[]) => {
   const postsWithTag = allPosts.filter(post =>

@@ -1,4 +1,4 @@
-import { Languages } from "@types/i18n";
+import { Languages } from "@interfaces/i18n";
 
 export const languages: {[key in Languages]: string} = {
   [Languages["zh-cn"]]: "中文",
