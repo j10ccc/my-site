@@ -1,6 +1,6 @@
 ---
 layout: "@layouts/MarkdownPostLayout.astro"
-title: Markdown 模版
+title: Markdown Template
 author: J10c
 pubDate: 2023-07-09
 tags: ["test", "programming", "thinking", "react", "dolly"]

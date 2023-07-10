@@ -39,8 +39,7 @@ const projectSlice: any[] = [];
     <h1>I'm J10c</h1>
   </div>
 
-  {
-    projectSlice.length !== 0 && (
+  { projectSlice.length !== 0 && (
       <section class="showcase">
         <h2>Pinned Projects</h2>
         <div class="grid" />
@@ -48,8 +47,7 @@ const projectSlice: any[] = [];
     )
   }
 
-  {
-    postSlice.length !== 0 && (
+  { postSlice.length !== 0 && (
       <section class="showcase">
         <a href="blog">
           <h2>Latest Posts</h2>
@@ -74,9 +72,12 @@ const projectSlice: any[] = [];
 <style lang="less">
 h1, h2 {
   font-family: "IBM Plex Sans", sans-serif;
-  margin: 0;
 }
-
+.hero {
+  h1 {
+    margin: 0;
+  }
+}
 .showcase {
   h2 {
     margin-bottom: 12px;
