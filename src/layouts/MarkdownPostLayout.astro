@@ -3,6 +3,7 @@ import type { Meta } from "@types/post";
 import BaseLayout from "./BaseLayout.astro";
 import "@styles/markdown.less";
 import "@fontsource/crete-round";
+import type { Languages } from "@types/i18n";
 
 export interface Props {
   frontmatter: Meta
@@ -14,7 +15,7 @@ const { lang } = Astro.params;
 const pageTitle = "Post"
 ---
 
-<BaseLayout title={pageTitle} lang={ lang as "en" | "zh-cn"}>
+<BaseLayout title={pageTitle} lang={lang as Languages}>
   <h1 class="post-title">{ frontmatter.title }</h1>
   <div class="post-meta">
     <span class="date">{ new Date(frontmatter.pubDate).toLocaleDateString(lang) }</span>

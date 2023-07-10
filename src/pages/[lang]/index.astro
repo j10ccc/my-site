@@ -40,32 +40,32 @@ const projectSlice: any[] = [];
   </div>
 
   { projectSlice.length !== 0 && (
-      <section class="showcase">
-        <h2>Pinned Projects</h2>
-        <div class="grid" />
-      </section>
-    )
+    <section class="showcase">
+      <h2>Pinned Projects</h2>
+      <div class="grid" />
+    </section>
+  )
   }
 
   { postSlice.length !== 0 && (
-      <section class="showcase">
-        <a href="blog">
-          <h2>Latest Posts</h2>
-        </a>
-        <div class="grid">
-          {postSlice.map((post) => (
-            <a href={post.url}>
-              <div class="item">
-                <span class="title">{post.meta.title}</span>
-                <span class="date">
-                  {new Date(post.meta.pubDate).toLocaleDateString(lang)}
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-    )
+    <section class="showcase">
+      <a href="blog">
+        <h2>Latest Posts</h2>
+      </a>
+      <div class="grid">
+        {postSlice.map((post) => (
+          <a href={post.url}>
+            <div class="item">
+              <span class="title">{post.meta.title}</span>
+              <span class="date">
+                {new Date(post.meta.pubDate).toLocaleDateString(lang)}
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
   }
 </BaseLayout>
 

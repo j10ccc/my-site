@@ -1,10 +1,11 @@
 ---
+import type { Languages } from "@types/i18n";
 import Navigation from "./Navigation.astro";
 import "@fontsource/ibm-plex-sans/500.css";
 
 export interface Props {
   title?: string;
-  lang: string;
+  lang: Languages;
 }
 
 const { title, lang } = Astro.props;

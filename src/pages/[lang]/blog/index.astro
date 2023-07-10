@@ -2,9 +2,10 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PostPreiew from "@components/PostPreiew.astro";
 import { getCollection } from "astro:content";
+import type { Languages } from "@types/i18n";
 
 export interface Props {
-	lang: "zh-cn" | "en"
+	lang: Languages;
 }
 
 export async function getStaticPaths() {
@@ -23,7 +24,6 @@ const allPosts = (await getCollection("blog")).map(page => {
 });
 
 const { lang } = Astro.props;
-
 ---
 
 <BaseLayout title="Blog" lang={ lang }>

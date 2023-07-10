@@ -3,9 +3,10 @@ import getTags from "@utils/getTags";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import "@fontsource/crete-round";
+import type { Languages } from "@types/i18n";
 
 export interface Props {
-	lang: "zh-cn" | "en"
+	lang: Languages;
 }
 
 export async function getStaticPaths() {

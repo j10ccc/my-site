@@ -4,6 +4,7 @@ import type { Post } from "@types/post";
 import getTags from "@utils/getTags";
 import { getCollection } from "astro:content";
 import { languages } from "@i18n/ui";
+import type { Languages } from "@types/i18n";
 
 export interface Props {
   posts: Post[];
@@ -38,7 +39,7 @@ const { lang, tag } = Astro.params;
 const { posts } = Astro.props;
 ---
 
-<BaseLayout title="Blog" lang={lang as "zh-cn" | "en"}>
+<BaseLayout title="Blog" lang={lang as Languages}>
   <h2>Posts tagged with {tag}</h2>
   <ul>
     {posts.map(post => (

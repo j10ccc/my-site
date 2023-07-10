@@ -1,10 +1,11 @@
 ---
 import Header from "@components/Header.astro";
 import "@styles/global.less";
+import type { Languages } from "@types/i18n";
 
 export interface Props {
-  title?: string;
-  lang: "en" | "zh-cn";
+	title?: string;
+	lang: Languages;
 }
 
 const {
@@ -14,16 +15,16 @@ const {
 ---
 
 <!DOCTYPE html>
-<html lang={lang}>
+<html lang={lang as string}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta name="description" content="Astro description">
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
   <body>
-    <Header title={title} lang={lang} />
+  	<Header title={title} lang={lang} />
     <slot />
   </body>
 </html>
