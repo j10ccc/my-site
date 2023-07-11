@@ -21,7 +21,7 @@ const {
     <meta name="description" content="Astro description">
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{title ? `${title} - ` : ""} J10c's site</title>
   </head>
   <body>
   	<Header title={title} lang={lang} />
