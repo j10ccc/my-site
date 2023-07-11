@@ -23,7 +23,7 @@ const { lang } = Astro.params;
     </div>
   }
   <div class="title">
-    <a href={post.url}>
+    <a href={`/${lang}/blog/${post.url}`}>
       { post.meta.title }
     </a>
   </div>

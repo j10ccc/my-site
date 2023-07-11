@@ -5,6 +5,7 @@ import getTags from "@utils/getTags";
 import { getCollection } from "astro:content";
 import { languages } from "@i18n/ui";
 import type { Languages } from "@interfaces/i18n";
+import PostPreiew from "@components/PostPreiew.astro";
 
 export interface Props {
   posts: Post[];
@@ -24,10 +25,12 @@ export async function getStaticPaths() {
   const routes = uniqueTags.map(tag => {
     const filteredPosts = allPosts.filter(post =>
       (post.meta.tags && tag !== undefined) &&
-      post.meta.tags?.includes(tag)
+      post.meta.tags!
+        .map(tag => tag.toUpperCase())
+        .includes(tag.toUpperCase())
     );
     return Object.keys(languages).map(language => ({
-      params: { lang: language, tag },
+      params: { lang: language, tag: tag.toLowerCase() },
       props: { posts: filteredPosts }
     }))
   }).flat();
@@ -40,10 +43,33 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout title="Blog" lang={lang as Languages}>
-  <h2>Posts tagged with {tag}</h2>
-  <ul>
-    {posts.map(post => (
-      <li><a href={`/${lang}/blog/${post.url}`}>{post.meta.title}</a></li>
-    ))}
-  </ul>
+  <main>
+    <div class="title">
+      <h2>Posts tagged with</h2>
+      <h2 class="tag">{tag?.toUpperCase()}</h2>
+    </div>
+    <ul>
+      {posts.map(post => (
+        <PostPreiew post={post} hightlightTag={tag} />
+      ))}
+    </ul>
+  </main>
 </BaseLayout>
+
+<style lang="less">
+main {
+  margin-top: 16px;
+}
+.title {
+  font-family: "IBM Plex Sans", sans-serif;
+  h2 {
+    margin: 0;
+    display: inline-block;
+  }
+  .tag {
+    font-family: 'Crete Round', sans-serif;
+    background-color: var(--stone-green-1);
+    border-radius: 6px;
+  }
+}
+</style>

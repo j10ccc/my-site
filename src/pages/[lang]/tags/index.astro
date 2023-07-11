@@ -32,7 +32,11 @@ const pageTitle = "Tag Index";
   <main>
     <div class="tags">
       {tags.map((tag) => (
-        <div class="tag"><a href={`/${lang}/tags/${tag}`}>{tag.toUpperCase()}</a></div>
+        <div class="tag">
+          <a href={`/${lang}/tags/${tag.toLowerCase()}`}>
+            {tag.toUpperCase()}
+          </a>
+        </div>
       ))}
     </div>
   </main>
