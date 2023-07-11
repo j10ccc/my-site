@@ -1,0 +1,46 @@
+---
+import { Languages } from "@interfaces/i18n";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const pageTitle = "Page Not Found";
+---
+
+<BaseLayout lang={Languages["zh-cn"]} title={pageTitle}>
+  <main>
+    <h1 class="expression"></h2>
+    <h2 class="title">/* 404 page not found */</h2>
+    <a href="/">Home</a>
+  </main>
+</BaseLayout>
+
+<style lang="less">
+main {
+  margin-top: 32px;
+  text-align: center;
+}
+h1, h2 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  color: var(--stone-font-black);
+}
+a {
+  color: var(--stone-red-6);
+}
+</style>
+
+<script>
+const expressions = [
+  "¯\\(ツ)/¯",
+  "(⊙_⊙)",
+  "(˚Δ˚)b",
+  "(^-^*)",
+  "(='X'=)",
+  "(;-;)",
+  "(>_<)ノ",
+  "(╯°□°）╯︵ ┻━┻",
+  "(ಠ_ಠ)",
+  "(>_<；)"
+]
+const h1 = document.querySelector(".expression");
+h1 && (h1.innerHTML = expressions[Math.floor(Math.random() * expressions.length)]);
+</script>
