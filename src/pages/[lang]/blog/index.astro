@@ -21,7 +21,7 @@ const allPosts = (await getCollection("blog"))
     const [_, ...slug] = page.slug.split("/");
     return {
       meta: page.data,
-      url: `blog/${slug.join("/")}`
+      url: `${slug.join("/")}`
     }
   })
   .sort((a, b) => new Date(b.meta.pubDate).getTime() - new Date(a.meta.pubDate).getTime());
