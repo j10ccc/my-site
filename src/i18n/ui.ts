@@ -14,7 +14,8 @@ export const ui: {[key in Languages]: { [key: string]: string }} = {
     "identify.occupation": "在杭大学生",
     "identify.hobby": "热爱新事物",
     "social.juejin": "稀土掘金",
-    "social.github": "Github"
+    "social.github": "Github",
+    "blog.slogan": "多记录些东西吧。"
   }, 
   [Languages["en"]]: {
     "identify.name": "J10c",
@@ -22,6 +23,7 @@ export const ui: {[key in Languages]: { [key: string]: string }} = {
     "identify.occupation": "A University Student in Hangzhou.",
     "identify.hobby": "I'm fond of new things.",
     "social.juejin": "Juejin",
-    "social.github": "Github"
+    "social.github": "Github",
+    "blog.slogan": "Keep more, keep in mind."
   }
 }

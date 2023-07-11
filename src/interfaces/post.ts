@@ -8,4 +8,5 @@ export interface Meta {
   pubDate: Date;
   author: string;
   tags?: string[];
+  description?: string;
 }

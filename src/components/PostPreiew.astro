@@ -2,17 +2,77 @@
 import type { Post } from "@interfaces/post";
 
 export interface Props {
-  post: Post
+  post: Post;
+  hightlightTag?: string;
 }
 
-const { post } = Astro.props;
+const { post, hightlightTag } = Astro.props;
+const { lang } = Astro.params;
 ---
 
 <div class="post-preview">
-  <div class="post-title">
+  { post.meta.tags?.length &&
+    <div class="tags">
+      { post.meta.tags?.map(tag => (
+        <span class:list={
+          ["tag", tag.toUpperCase() === hightlightTag?.toUpperCase() && "highlight"]
+        }>
+          <a href={`/${lang}/tags/${tag}`}> {tag.toUpperCase()} </a>
+        </span>
+      ))}
+    </div>
+  }
+  <div class="title">
     <a href={post.url}>
       { post.meta.title }
     </a>
   </div>
-  <div class="post-date">{ post.meta.pubDate }</div>
+  <div class="date">{ new Date(post.meta.pubDate).toLocaleDateString(lang) }</div>
+  { post.meta.description &&
+    <div class="description"> { post.meta.description } </div>
+  }
 </div>
+
+<style lang="less">
+.post-preview {
+  margin-top: 36px;
+}
+.title {
+  font-family: 'Crete Round', sans-serif;
+  font-size: 1.1rem;
+  a {
+    color: var(--stone-red-7);
+    text-decoration: none;
+  }
+}
+
+.tags {
+  display: flex;
+  font-size: .9rem;
+  gap: 4px;
+  .tag {
+    padding: 2px 0;
+    border-radius: 6px;
+    transition: .3s all;
+    font-family: 'Crete Round', sans-serif;
+    a {
+      color: #000000cc;
+      text-decoration: none;
+    }
+    &:hover {
+      background-color: var(--stone-green-1);
+    }
+  }
+  .tag.highlight {
+    background-color: var(--stone-green-1);
+  }
+}
+.date {
+  font-family: "IBM Plex Sans", sans-serif;
+  opacity: .8;
+  font-size: .9rem;
+}
+.description {
+  margin-top: 6px;
+}
+</style>

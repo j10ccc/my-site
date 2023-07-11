@@ -3,6 +3,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import PostPreiew from "@components/PostPreiew.astro";
 import { getCollection } from "astro:content";
 import type { Languages } from "@interfaces/i18n";
+import { useTranslations } from "@hooks/i18n/useTranslations";
 
 export interface Props {
 	lang: Languages;
@@ -15,23 +16,29 @@ export async function getStaticPaths() {
   ]
 }
 
-const allPosts = (await getCollection("blog")).map(page => {
-  const [_, ...slug] = page.slug.split("/");
-  return {
-    meta: page.data,
-    url: `blog/${slug.join("/")}`
-  }
-});
+const allPosts = (await getCollection("blog"))
+  .map(page => {
+    const [_, ...slug] = page.slug.split("/");
+    return {
+      meta: page.data,
+      url: `blog/${slug.join("/")}`
+    }
+  })
+  .sort((a, b) => new Date(b.meta.pubDate).getTime() - new Date(a.meta.pubDate).getTime());
 
 const { lang } = Astro.props;
+const t = useTranslations(lang);
 ---
 
 <BaseLayout title="Blog" lang={ lang }>
-  <p>This is where I will post about my journey learning Astro.</p>
-
-  <ul>
-    {allPosts.map((post) => (
-      <PostPreiew post={post} />
-    ))}
-  </ul>
+  <p class="slogan">{ t("blog.slogan")}</p>
+  {allPosts.map((post) => (
+    <PostPreiew post={post} />
+  ))}
 </BaseLayout>
+
+<style lang="less">
+.slogan {
+  font-family: "IBM Plex Sans", sans-serif;
+}
+</style>
