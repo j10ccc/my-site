@@ -26,7 +26,7 @@ const t = useTranslations(lang);
 <div class="social">
   { socialMedias.map(item => (
     <a class="item" href={item.link} style={{ "--icon-color": item.color }}>
-      { item.label && <span>{ item.label }</span> }
+      { item.label && <span>{ t(`social.${item.label}`) }</span> }
     </a>
   ))}
 </div>
