@@ -1,23 +1,48 @@
 ---
-import { getCollection } from "astro:content"
+import PostNav from "@components/PostNav.astro";
+import { getCollection, type CollectionEntry } from "astro:content"
+
+interface Props {
+  page: CollectionEntry<"blog">;
+  next: CollectionEntry<"blog">;
+  previous: CollectionEntry<"blog">;
+}
 
 export async function getStaticPaths() {
   const pages = await getCollection("blog");
 
-  const paths = pages.map(page => {
-    const [lang, ...slug] = page.slug.split("/");
-    return {
-      params: { lang, slug: slug.join("/") || undefined },
-      props: page
-    }
-  })
+  const paths = pages
+    .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+    .map((page, index) => {
+      const [lang, ...slug] = page.slug.split("/");
+      return {
+        params: { lang, slug: slug.join("/") || undefined },
+        props: { page, next: pages[index + 1], previous: pages[index - 1] }
+      }
+    })
 
   return paths;
 }
 
-const page = Astro.props;
+const {
+  page,
+  next,
+  previous
+} = Astro.props;
+
+const nextNav = next
+  ? { label: next.data.title, link: next.slug.split("/")[1] }
+  : { label: "Blog", link: "./" };
+
+const previousNav = previous
+  ? { label: previous.data.title, link: previous.slug.split("/")[1] }
+  : { label: "Blog", link: "./" };
 
 const { Content } = await page.render();
 ---
 
 <Content />
+<PostNav
+  next={nextNav}
+  previous={previousNav}
+/>

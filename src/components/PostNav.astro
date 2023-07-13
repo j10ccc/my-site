@@ -1,0 +1,71 @@
+---
+import type { Post } from '@interfaces/post';
+
+interface NavItem {
+  label: string;
+  link: string;
+}
+export interface Props {
+  next: NavItem,
+  previous: NavItem
+}
+
+const { next, previous } = Astro.props;
+
+---
+
+<div class="toolbar">
+  { previous &&
+    <div class="item"> 
+      <a href={previous.link}>← { previous.label } </a>
+    </div>
+  }
+  <div class="item center">
+    <a href="#top">TOP</a>
+  </div>
+  { next &&
+    <div class="item"> 
+      <a href={next.link}> { next.label } →</a>
+    </div>
+  }
+</div>
+
+<style lang="less">
+.toolbar {
+  font-family: 'Crete Round', sans-serif;
+  margin-top: 24px;
+  border-top: 1px solid gray;
+  display: flex;
+  height: 72px;
+  text-transform: uppercase;
+
+  .item {
+    flex: 50%;
+    a {
+      display: block;
+      height: 100%;
+      text-decoration: none;
+      color: var(--stone-font-black);
+      padding: 12px 20px 0 20px;
+      opacity: .6;
+      transition: .2s all;
+      &:hover {
+        opacity: 1;
+        background: radial-gradient(circle at top, var(--stone-white) 5%, #fcf5f5 100%);
+      }
+    }
+    &:first-child {
+      text-align: start;
+    }
+    &:last-child {
+      text-align: end;
+    }
+    &.center {
+      flex: 0;
+    }
+    &:not(:last-child) {
+      border-right: 1px solid lightgray;
+    }
+  }
+}
+</style>
