@@ -1,6 +1,4 @@
 ---
-import type { Post } from '@interfaces/post';
-
 interface NavItem {
   label: string;
   link: string;
@@ -14,7 +12,7 @@ const { next, previous } = Astro.props;
 
 ---
 
-<div class="toolbar">
+<div class="navbar">
   { previous &&
     <div class="item"> 
       <a href={previous.link}>← { previous.label } </a>
@@ -31,9 +29,9 @@ const { next, previous } = Astro.props;
 </div>
 
 <style lang="less">
-.toolbar {
+.navbar {
   font-family: 'Crete Round', sans-serif;
-  margin-top: 24px;
+  margin-top: 4rem;
   border-top: 1px solid gray;
   display: flex;
   height: 72px;
