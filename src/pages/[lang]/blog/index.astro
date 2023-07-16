@@ -31,14 +31,25 @@ const t = useTranslations(lang);
 ---
 
 <BaseLayout title="Blog" lang={ lang }>
-  <p class="slogan">{ t("blog.slogan")}</p>
-  {allPosts.map((post) => (
-    <PostPreiew post={post} />
-  ))}
+  <main>
+    <p class="slogan">{ t("blog.slogan")}</p>
+    <div class="list">
+      {allPosts.map((post) => (
+        <PostPreiew post={post} />
+      ))}
+    </div>
+  </main>
 </BaseLayout>
 
 <style lang="less">
+main {
+  padding: 0 1rem 1rem 1rem;
+  margin-bottom: 2rem;
+}
 .slogan {
   font-family: "IBM Plex Sans", sans-serif;
+}
+.list {
+  padding: 0 1rem;
 }
 </style>

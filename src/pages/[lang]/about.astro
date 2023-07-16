@@ -22,11 +22,19 @@ const pageTitle = "About Me";
 const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 ---
 <BaseLayout title={ pageTitle } lang={lang}>
-  <Social lang={lang} />
-  <h2>... and my new Astro site!</h2>
-  <p>My skills are:</p>
-  <ul>
-    {skills.map((skill) => <li class="skill">{skill}</li>)}
-  </ul>
+  <main>
+    <Social lang={lang} />
+    <h2>... and my new Astro site!</h2>
+    <p>My skills are:</p>
+    <ul>
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+  </main>
   <Footer />
 </BaseLayout>
+
+<style lang="less">
+main {
+  padding: 0 1rem;
+}
+</style>

@@ -6,6 +6,7 @@ import { getCollection } from "astro:content";
 import { languages } from "@i18n/ui";
 import type { Languages } from "@interfaces/i18n";
 import PostPreiew from "@components/PostPreiew.astro";
+import Footer from "@components/Footer.astro";
 
 export interface Props {
   posts: Post[];
@@ -48,17 +49,19 @@ const { posts } = Astro.props;
       <h2>Posts tagged with</h2>
       <h2 class="tag">{tag?.toUpperCase()}</h2>
     </div>
-    <ul>
+    <div class="list">
       {posts.map(post => (
         <PostPreiew post={post} hightlightTag={tag} />
       ))}
     </ul>
   </main>
+  <Footer />
 </BaseLayout>
 
 <style lang="less">
 main {
   margin-top: 16px;
+  padding: 0 1rem;
 }
 .title {
   font-family: "IBM Plex Sans", sans-serif;
@@ -72,4 +75,9 @@ main {
     border-radius: 6px;
   }
 }
+
+.list {
+  padding-left: 1rem;
+}
+
 </style>
