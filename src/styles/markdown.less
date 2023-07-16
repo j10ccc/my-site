@@ -24,7 +24,7 @@
   }
   blockquote {
     color: rgba(@stone-font-black, .8) !important;
-    margin: 0;
+    margin: 1rem;
     padding: 8px 18px;
     background-color: rgba(@stone-red-1, .4);
     border-left: 3px solid @stone-red-3;
@@ -45,7 +45,14 @@
     border-top: 3px solid @stone-red-1;
   }
   img {
-    max-width: 35%;
+    display: block;
+    margin: .5rem auto;
+    max-width: 80%;
+    max-height: 450px;
+    @media (max-width: 576px) {
+      max-width: 100%;
+      /* CSS styles for medium screens */
+    }
   }
   table {
     box-shadow: @stone-shadow;
