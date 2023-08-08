@@ -1,48 +1,74 @@
 ---
 import PostNav from "@components/PostNav.astro";
-import { getCollection, type CollectionEntry } from "astro:content"
+import { languages } from "@i18n/ui";
+import type { LanguageCollection } from "@interfaces/post";
+import type { CollectionEntry } from "astro:content";
+import { getLanguageCollections, parseCollection } from "@utils/languageCollection";
+import type { Languages } from "@interfaces/i18n";
 
 interface Props {
+  postLang: Languages;
   page: CollectionEntry<"blog">;
-  next: CollectionEntry<"blog">;
-  previous: CollectionEntry<"blog">;
+  next: LanguageCollection | undefined;
+  previous: LanguageCollection | undefined;
 }
 
 export async function getStaticPaths() {
-  const pages = await getCollection("blog");
+  const collections = await getLanguageCollections();
+  const allPost = collections
+    .map((collection, index) =>
+      Object.values(collection.posts).map((post) => ({
+        ...post,
+        collectionIndex: index,
+      }))
+    )
+    .flat();
 
-  const paths = pages
-    .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
-    .map((page, index) => {
-      const [lang, ...slug] = page.slug.split("/");
-      return {
-        params: { lang, slug: slug.join("/") || undefined },
-        props: { page, next: pages[index + 1], previous: pages[index - 1] }
-      }
+  const paths = allPost
+    .sort((a, b) =>
+      new Date(b.entry.data.pubDate).getTime() - new Date(a.entry.data.pubDate).getTime()
+    )
+    .map(page => {
+      const [lang, ...slug] = page.entry.slug.split("/");
+      return Object.keys(languages).map((languages) => {
+        return {
+          params: { lang: languages, slug: `${slug.join("/")}-${lang}` },
+          props: {
+            postLang: lang,
+            page: page.entry,
+            next: collections[page.collectionIndex + 1],
+            previous: collections[page.collectionIndex - 1],
+          },
+        };
+      });
     })
+    .flat();
 
   return paths;
 }
 
-const {
-  page,
-  next,
-  previous
-} = Astro.props;
+const { postLang, page, next, previous } = Astro.props;
 
-const nextNav = next
-  ? { label: next.data.title, link: next.slug.split("/")[1] }
-  : { label: "Blog", link: "./" };
-
-const previousNav = previous
-  ? { label: previous.data.title, link: previous.slug.split("/")[1] }
-  : { label: "Blog", link: "./" };
+const generateNav = (collection: LanguageCollection | undefined, lang: Languages) => {
+  if (collection) {
+    const post = parseCollection(collection, lang).post;
+    return {
+      label: post.meta.title,
+      link: post.url
+    }
+  } else {
+    return {
+      label: "Blog",
+      link: "./"
+    }
+  }
+}
+ 
+const nextNav = generateNav(next, postLang);
+const previousNav = generateNav(previous, postLang);
 
 const { Content } = await page.render();
 ---
 
 <Content />
-<PostNav
-  next={nextNav}
-  previous={previousNav}
-/>
+<PostNav next={nextNav} previous={previousNav} />

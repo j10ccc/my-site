@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import PostPreiew from "@components/PostPreiew.astro";
-import { getCollection } from "astro:content";
+import PostPreview from "@components/PostPreview.astro";
 import type { Languages } from "@interfaces/i18n";
 import { useTranslations } from "@hooks/i18n/useTranslations";
+import { getLanguageCollections } from "@utils/languageCollection";
 
 export interface Props {
 	lang: Languages;
@@ -16,26 +16,18 @@ export async function getStaticPaths() {
   ]
 }
 
-const allPosts = (await getCollection("blog"))
-  .map(page => {
-    const [_, ...slug] = page.slug.split("/");
-    return {
-      meta: page.data,
-      url: `${slug.join("/")}`
-    }
-  })
-  .sort((a, b) => new Date(b.meta.pubDate).getTime() - new Date(a.meta.pubDate).getTime());
-
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
+const allCollections = await getLanguageCollections();
 ---
 
 <BaseLayout title="Blog" lang={ lang }>
   <main>
-    <p class="slogan">{ t("blog.slogan")}</p>
+    <p class="slogan">{ t("blog.slogan") }</p>
     <div class="list">
-      {allPosts.map((post) => (
-        <PostPreiew post={post} />
+      {allCollections.map((collection) => (
+        <PostPreview {collection} />
       ))}
     </div>
   </main>

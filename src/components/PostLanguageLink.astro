@@ -1,0 +1,45 @@
+---
+import type { Languages } from "@interfaces/i18n";
+
+export interface Props {
+  /** Locale in url params */
+  locale: string;
+  /** Languages set */
+  languages: Array<[lang: Languages, url: string]>;
+  /** Langauages want to hidden */
+  omit?: Array<Languages>;
+}
+
+const { locale, languages, omit } = Astro.props;
+
+const displayLanguages = languages.filter((language) => {
+  return !omit?.includes(language[0]);
+});
+
+---
+
+<span class="languages">
+  {
+    displayLanguages.map((language) =>
+      <a href={`/${locale}/blog/${language[1]}`}>{language[0].toUpperCase()}</a>
+    )
+  }
+</span>
+
+<style lang="less">
+.languages {
+  font-size: .8rem;
+  font-family: "Crete Round", sans-serif;
+  a {
+    text-decoration: none;
+    color: var(--stone-red-8);
+  }
+  a:not(:last-child) {
+    margin-right: .3rem;
+    &::after {
+      content: "/";
+      margin-left: .3rem;
+    }
+  }
+}
+</style>

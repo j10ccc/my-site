@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
 import { useTranslations } from "@hooks/i18n/useTranslations";
 import Social from "@components/Social.astro";
 import type { Languages } from "@interfaces/i18n";
 import Footer from "@components/Footer.astro";
+import { getLanguageCollections, getPostsWithLanguage } from "@utils/languageCollection";
+import PostLanguageLink from "@components/PostLanguageLink.astro";
 
 export interface Props {
   lang: Languages;
@@ -19,24 +20,19 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.props;
 
-const postSlice = (await getCollection("blog"))
-  .map((page) => {
-    const [_, ...slug] = page.slug.split("/");
-    return {
-      meta: page.data,
-      url: `blog/${slug.join("/")}`,
-    };
+const collectionSlice = (await getLanguageCollections())
+  .sort((a, b) => {
+    let postA = a.posts[lang] || Object.entries(a.posts)[0][1];
+    let postB = b.posts[lang] || Object.entries(b.posts)[0][1];
+    return new Date(postB.meta.pubDate).getTime() - new Date(postA.meta.pubDate).getTime()
   })
-  .sort(
-    (a, b) =>
-      new Date(b.meta.pubDate).getTime() - new Date(a.meta.pubDate).getTime()
-  )
   .slice(0, 5);
+
+const withLanguage = getPostsWithLanguage(collectionSlice, lang);
 
 const projectSlice: any[] = [];
 
 const t = useTranslations(lang);
-
 ---
 
 <BaseLayout lang={lang}>
@@ -58,21 +54,21 @@ const t = useTranslations(lang);
     </section>
   )}
 
-  { postSlice.length !== 0 && (
+  { withLanguage.length !== 0 && (
     <section class="showcase">
       <a href="blog">
         <h2>Latest Posts</h2>
       </a>
       <div class="grid">
-        {postSlice.map((post) => (
-          <a href={post.url}>
-            <div class="item">
-              <span class="title">{post.meta.title}</span>
-              <span class="date">
-                {new Date(post.meta.pubDate).toLocaleDateString(lang)}
-              </span>
-            </div>
-          </a>
+        {withLanguage.map((item) => (
+          <div class="item">
+            <a class="title" href={`blog/${item.post.url}`}>{item.post.meta.title}</span>
+            <PostLanguageLink locale={lang} languages={item.languages} omit={[lang]} />
+            <span style="flex: auto"></span>
+            <span class="date">
+              {new Date(item.post.meta.pubDate).toLocaleDateString(lang)}
+            </span>
+          </div>
         ))}
       </div>
     </section>
@@ -81,7 +77,7 @@ const t = useTranslations(lang);
 </BaseLayout>
 
 <style lang="less">
-h1, h2, p, a {
+h1, h2, p {
   font-family: "IBM Plex Sans", sans-serif;
 }
 .hero {
@@ -117,24 +113,22 @@ h1, h2, p, a {
     grid-template-columns: 1fr;
     margin: 0 4px;
     gap: 12px;
-    a {
-      color: var(--stone-font-black);
+    .item {
+      display: flex;
+      padding: 4px 0;
+      border-radius: 4px;
+      transition: 0.3s all;
       font-weight: 500;
-      .item {
-        display: flex;
-        justify-content: space-between;
-        padding: 4px 0;
-        border-radius: 4px;
-        transition: 0.3s all;
-        &:hover {
-          background-color: var(--stone-red-1);
-        }
-        .date {
-          opacity: 0.6;
-        }
-        .title {
-          font-family: 'Crete Round', sans-serif;
-        }
+      gap: 8px;
+      color: var(--stone-font-black);
+      &:hover {
+        background-color: var(--stone-red-1);
+      }
+      .date {
+        opacity: 0.6;
+      }
+      .title {
+        font-family: "Crete Round", sans-serif;
       }
     }
   }

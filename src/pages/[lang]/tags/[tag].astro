@@ -1,46 +1,43 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import type { Post } from "@interfaces/post";
+import type { LanguageCollection } from "@interfaces/post";
 import getTags from "@utils/getTags";
-import { getCollection } from "astro:content";
+import { getLanguageCollections, getPostsWithLanguage, parseCollection } from "@utils/languageCollection";
 import { languages } from "@i18n/ui";
 import type { Languages } from "@interfaces/i18n";
-import PostPreiew from "@components/PostPreiew.astro";
+import PostPreview from "@components/PostPreview.astro";
 import Footer from "@components/Footer.astro";
 
 export interface Props {
-  posts: Post[];
+  collections: LanguageCollection[];
 }
 
-export async function getStaticPaths() {
-  const allPosts = (await getCollection("blog")).map(page => {
-    const [, ...slug] = page.slug.split("/");
-    return {
-      meta: page.data,
-      url: slug.join("/"),
-    }
-  });
+const { lang, tag } = Astro.params;
+const { collections } = Astro.props;
 
-  const uniqueTags = getTags(allPosts);
+export async function getStaticPaths() {
+  const allCollections = await getLanguageCollections();
+  const withLanguage = getPostsWithLanguage(allCollections);
+
+  const uniqueTags = getTags(withLanguage.map(item => item.post));
 
   const routes = uniqueTags.map(tag => {
-    const filteredPosts = allPosts.filter(post =>
-      (post.meta.tags && tag !== undefined) &&
-      post.meta.tags!
-        .map(tag => tag.toUpperCase())
-        .includes(tag.toUpperCase())
-    );
+    const filtered = allCollections.filter(item => {
+      const target = parseCollection(item);
+      return (target.post.meta.tags && tag !== undefined) &&
+        target.post.meta.tags!
+          .map(tag => tag.toUpperCase())
+          .includes(tag.toUpperCase())
+    })
     return Object.keys(languages).map(language => ({
       params: { lang: language, tag: tag.toLowerCase() },
-      props: { posts: filteredPosts }
+      props: { collections: filtered }
     }))
   }).flat();
 
   return routes;
 }
 
-const { lang, tag } = Astro.params;
-const { posts } = Astro.props;
 ---
 
 <BaseLayout title="Blog" lang={lang as Languages}>
@@ -50,8 +47,8 @@ const { posts } = Astro.props;
       <h2 class="tag">{tag?.toUpperCase()}</h2>
     </div>
     <div class="list">
-      {posts.map(post => (
-        <PostPreiew post={post} hightlightTag={tag} />
+      {collections.map(collection => (
+        <PostPreview collection={collection} hightlightTag={tag} />
       ))}
     </ul>
   </main>

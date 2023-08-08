@@ -1,13 +1,15 @@
 ---
 import getTags from "@utils/getTags";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
 import type { Languages } from "@interfaces/i18n";
 import Footer from "@components/Footer.astro";
+import { getLanguageCollections, getPostsWithLanguage } from "@utils/languageCollection";
 
 export interface Props {
 	lang: Languages;
 }
+
+const { lang } = Astro.props;
 
 export async function getStaticPaths() {
   return [
@@ -16,16 +18,11 @@ export async function getStaticPaths() {
   ]
 }
 
-const allPosts = (await getCollection("blog")).map(page => {
-  const [_, ...slug] = page.slug.split("/");
-  return {
-    meta: page.data,
-    url: slug.join("/")
-  }
-});
+const allCollections = await getLanguageCollections();
 
-const tags = getTags(allPosts);
-const { lang } = Astro.props;
+const withLanguage = getPostsWithLanguage(allCollections, lang)
+
+const tags = getTags(withLanguage.map(item => item.post));
 const pageTitle = "Tag Index";
 ---
 

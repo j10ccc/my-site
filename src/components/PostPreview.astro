@@ -1,19 +1,25 @@
 ---
-import type { Post } from "@interfaces/post";
+import type { Languages } from "@interfaces/i18n";
+import type { LanguageCollection } from "@interfaces/post";
+import { parseCollection } from "@utils/languageCollection";
+import PostLanguageLink from "./PostLanguageLink.astro";
 
 export interface Props {
-  post: Post;
+  collection: LanguageCollection;
   hightlightTag?: string;
 }
 
-const { post, hightlightTag } = Astro.props;
+const { collection, hightlightTag } = Astro.props;
 const { lang } = Astro.params;
+
+const data = parseCollection(collection, lang as Languages);
+
 ---
 
 <div class="post-preview">
-  { post.meta.tags?.length &&
+  { data.post.meta.tags?.length &&
     <div class="tags">
-      { post.meta.tags?.map(tag => (
+      { data.post.meta.tags?.map(tag => (
         <span class:list={
           ["tag", tag.toUpperCase() === hightlightTag?.toUpperCase() && "highlight"]
         }>
@@ -22,14 +28,17 @@ const { lang } = Astro.params;
       ))}
     </div>
   }
-  <div class="title">
-    <a href={`/${lang}/blog/${post.url}`}>
-      { post.meta.title }
-    </a>
+  <div style="display: flex; gap: 8px">
+    <div class="title">
+      <a href={`/${lang}/blog/${data.post.url}`}>
+        { data.post.meta.title }
+      </a>
+    </div>
+    <PostLanguageLink locale={lang || ""} languages={data.languages} />
   </div>
-  <div class="date">{ new Date(post.meta.pubDate).toLocaleDateString(lang) }</div>
-  { post.meta.description &&
-    <div class="description"> { post.meta.description } </div>
+  <div class="date">{ new Date(data.post.meta.pubDate).toLocaleDateString(lang) }</div>
+  { data.post.meta.description &&
+    <div class="description"> { data.post.meta.description } </div>
   }
 </div>
 
@@ -45,7 +54,6 @@ const { lang } = Astro.params;
     text-decoration: none;
   }
 }
-
 .tags {
   display: flex;
   font-size: .9rem;
