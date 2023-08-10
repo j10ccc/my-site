@@ -10,7 +10,7 @@ tags: ["programming"]
 
 这几天因为疫情，学校在网上开课，但我又刚买了2只舵机，得在树莓派上先搭建好环境，于是就一边上课一边搭建，因为网课限制Windows平台，所以使用`git`连到了树莓派，但是我发现了一个严重的问题——cmd的字体不是等宽的！
 
-[![](https://s2.ax1x.com/2020/02/16/39VeL6.png)](https://s2.ax1x.com/2020/02/16/39VeL6.png)
+![39VeL6.png](https://cdn.j10ccc.xyz/static/blog/39VeL6.png)
 
 默认的新宋体
 
@@ -37,17 +37,17 @@ tags: ["programming"]
 
 Microsoft YaHei Mono 是微软为 [Ubuntu on Windows](https://www.microsoft.com/zh-cn/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab#) 设计的一款等宽字体，正好可以拿来给自家的Powershell用，但是它渲染的汉字却有些奇怪。
 
-[![](https://s2.ax1x.com/2020/02/16/39VneK.png)](https://s2.ax1x.com/2020/02/16/39VneK.png)
+![39VneK.png](https://cdn.j10ccc.xyz/static/blog/39VneK.png)
 
 Microsoft YaHei Mono
 
 更纱黑体较圆润的 Microsoft YaHei Mono，更为修长。
 
-[![](https://s2.ax1x.com/2020/02/16/39VudO.png)](https://s2.ax1x.com/2020/02/16/39VudO.png)
+![39VudO.png](https://cdn.j10ccc.xyz/static/blog/39VudO.png)
 
 更纱黑体
 
-[![](https://s2.ax1x.com/2020/02/16/39VZsx.png)](https://s2.ax1x.com/2020/02/16/39VZsx.png)
+![39VZsx.png](https://cdn.j10ccc.xyz/static/blog/39VZsx.png)
 
 两种字体在同字号（28）下渲染汉字对比
 

@@ -28,7 +28,7 @@ tags: ["android"]
     
 6.  解锁 Bootloader 后每次开机会出现警告，强迫症介意请别 ROOT
     
-    [![Snipaste_2021-06-30_23-52-49](https://gitee.com/j10ccc/image_ports/raw/master/img/Snipaste_2021-06-30_23-52-49.png)](https://gitee.com/j10ccc/image_ports/raw/master/img/Snipaste_2021-06-30_23-52-49.png)
+    ![6bbp2S.png](https://cdn.j10ccc.xyz/static/blog/6bbp2S.png)
     
 
 ## 准备&约定
@@ -43,7 +43,7 @@ tags: ["android"]
 
 开 hadesFirm，型号 SM-P200 ，国行区域CHN（港版TGY），检测更新，如图设置，点击下载（下得挺快的，比某mobile快多了
 
-[![Snipaste_2021-06-30_21-44-38](https://gitee.com/j10ccc/image_ports/raw/master/img/Snipaste_2021-06-30_21-44-38.png)](https://gitee.com/j10ccc/image_ports/raw/master/img/Snipaste_2021-06-30_21-44-38.png)
+![G7Jo8Q.png](https://cdn.j10ccc.xyz/static/blog/G7Jo8Q.png)
 
 下好之后解压，有 AP，BL，CSC，HOME_CSC开头的4个文件
 
@@ -53,7 +53,7 @@ tags: ["android"]
     
 2.  USBA连接电脑（不要Type-C连电脑！）打开晨钟工具箱，被检测到进入软件页面后，就算连接成功了
     
-    [![Snipaste_2021-06-30_21-59-30](https://gitee.com/j10ccc/image_ports/raw/master/img/Snipaste_2021-06-30_21-59-30.png)](https://gitee.com/j10ccc/image_ports/raw/master/img/Snipaste_2021-06-30_21-59-30.png)
+    ![MRQxLo.png](https://cdn.j10ccc.xyz/static/blog/MRQxLo.png)
     
 3.  点击**下载端口驱动**，解压安装就行了
     
@@ -62,13 +62,13 @@ tags: ["android"]
 
 1.  点击**打开Odin刷机工具**，根据弹出提示清除所有账户（如果有），如果驱动安装成功的话中间一排小格（可能不是第一格）显示蓝色（如果不是，请重启电脑）并且 Log 中输出`Added!`，这样表示平板被Odin检测到了
     
-    [![Snipaste_2021-06-20_16-40-33](https://gitee.com/j10ccc/image_ports/raw/master/img/Snipaste_2021-06-20_16-40-33.png)](https://gitee.com/j10ccc/image_ports/raw/master/img/Snipaste_2021-06-20_16-40-33.png)
+    ![5ai4M5.png](https://cdn.j10ccc.xyz/static/blog/5ai4M5.png)
     
 2.  Odin中选项切换到 Opinions ，取消选择 Auto Reboot
     
 3.  其他不用更改，如图导入文件(BL导入BL开头文件，AP导入AP开头文件，CSC导入CSC开头文件，HOME_CSC文件暂时用不到)
     
-    [![Snipaste_2021-06-20_16-40-52](https://gitee.com/j10ccc/image_ports/raw/master/img/Snipaste_2021-06-20_16-40-52.png)](https://gitee.com/j10ccc/image_ports/raw/master/img/Snipaste_2021-06-20_16-40-52.png)
+    ![Z7kbwL.png](https://cdn.j10ccc.xyz/static/blog/Z7kbwL.png)
     
 4.  保持连接电脑，重启平板，在黑屏的时候按住 **音量+** 和 **音量-**，进入 Download Mode，根据提示短按音量上进入刷机模式（看到这界面突然发怵不敢刷的，可以长按 **音量-** 和 **关机键** 重启回系统）
     

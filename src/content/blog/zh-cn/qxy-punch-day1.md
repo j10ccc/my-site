@@ -30,9 +30,9 @@ tags: ["programming", "backend"]
 
 ## 查看请求
 
-![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/28f7e31d874d43508d8fabd029053e54~tplv-k3u1fbpfcp-watermark.image?)
+![28f7e3.png](https://cdn.j10ccc.xyz/static/blog/28f7e3.png)
 
-![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1728ee78a660408a8acd22b19d1f936f~tplv-k3u1fbpfcp-watermark.image?)
+![1728ee.png](https://cdn.j10ccc.xyz/static/blog/1728ee.png)
 
 复制了 curl 命令格式之后，转换 go 代码粘贴到文件一气呵成
 
@@ -100,10 +100,10 @@ word := os.Args[1] // word 就是我们要查询的单词
 
 ## 分析返回数据
 
-![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6a40a28a154e4e749abda3f1ecdf700c~tplv-k3u1fbpfcp-watermark.image?)
+![6a40a2.png](https://cdn.j10ccc.xyz/static/blog/6a40a2.png)
 
 ```json
-{"result":{"msg":"success","code":200},"data":{"entries":[{"explain":"abbr. 词典，字典（dictionary）","entry":"dict"},{"explain":"v. 命令，规定；影响，支配；口述，使听写; n. 命令，规定; n. 命令；指示","entry":"dictate"},{"explain":"n. 字典；词典","entry":"dictionary"},{"explain":"n. 口述，听写；命令，发号施令","entry":"dictation"},{"explain":"n. 独裁者；专横的人","entry":"dictator"}],"query":"dict","language":"en","type":"dict"}}
+{}
 ```
 
 可以看到，联想词和翻译都已经有了
@@ -161,6 +161,6 @@ for _, item := range dictResponse.Data.Entries {
 }
 ```
 
-![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/40f760709d0d4b08a9f53713495140a8~tplv-k3u1fbpfcp-watermark.image?)
+![40f760.png](https://cdn.j10ccc.xyz/static/blog/40f760.png)
 
 滴～ 提前下班

@@ -18,7 +18,7 @@ Fiddler 4，学习平板一台
 
 ## 环境配置
 
-1.  打开Fiddler，设置代理端口。 [![](https://s1.ax1x.com/2020/03/13/8usH54.png)](https://s1.ax1x.com/2020/03/13/8usH54.png)
+1.  打开Fiddler，设置代理端口。 ![8usH54.png](https://cdn.j10ccc.xyz/static/blog/8usH54.png)
     
 2.  依次点开开学习平板`设置-连接-WLAN-当前网络-高级设置-代理服务器-无—>手动` 代理主机名填运行 Fiddler 的电脑的内网IP，端口填`8888`，点击保存。 这时候在平板上随便打开一个APP，刷新两下看看Fiddler里面有没有请求或者响应信息出现。
     
@@ -29,8 +29,7 @@ Fiddler 4，学习平板一台
     
 2.  当云作业首页加载得差不多的时候，一次双击点开 Fiddler 中各个数据包，选择右侧窗口的 `TextView` 查看每个数据包的详细内容，如果发现有一个数据包的内容特别长（由滚动条可以看出）那么它就是我们要找的那个包，点击右下角的`View in Notepad`，保存这条数据信息。
     
-    [![](https://s1.ax1x.com/2020/03/13/8usLG9.png)](https://s1.ax1x.com/2020/03/13/8usLG9.png)
-    
+    ![8usLG9.png](https://cdn.j10ccc.xyz/static/blog/8usLG9.png)
 
 ## 分析数据
 
@@ -65,7 +64,7 @@ Fiddler 4，学习平板一台
 
 令人好奇的是，每条作业信息中`contentUrl`属性值为一个 URL ，指向的是一个 TXT 文件，我下载来一看
 
-[![](https://s1.ax1x.com/2020/03/13/8usxr6.jpg)](https://s1.ax1x.com/2020/03/13/8usxr6.jpg)
+![8usxr6.jpg](https://cdn.j10ccc.xyz/static/blog/8usxr6.jpg)
 
 **入眼的是满满的答案啊！**
 
@@ -197,7 +196,7 @@ if __name__ == "__main__":
     
 2.  下载完毕后，输入答案相应的学科编号，答案即刻生成。
     
-    [![](https://s1.ax1x.com/2020/03/13/8usO2R.png)](https://s1.ax1x.com/2020/03/13/8usO2R.png)
+    ![8usO2R.png](https://cdn.j10ccc.xyz/static/blog/8usO2R.png)
 
 ```sh
 $ ls

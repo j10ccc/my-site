@@ -6,7 +6,7 @@ pubDate: 2022-06-21
 tags: ["programming", "vim"]
 ---
 
-[![jrcBy4.md.png](https://s1.ax1x.com/2022/07/09/jrcBy4.png)](https://imgtu.com/i/jrcBy4)
+![jrcBy4.png](https://cdn.j10ccc.xyz/static/blog/jrcBy4.png)
 ## Feature
 
 - JSX / TSX 语法检测(TSServer/ESLint)，不亚于 VSCode 的补全体验

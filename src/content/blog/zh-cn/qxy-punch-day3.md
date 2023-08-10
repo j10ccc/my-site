@@ -15,10 +15,10 @@ tags: ["react"]
 ## 结果展示
 
 - Google 中的结果条目截图
-![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3e4af0515d934f128babb9f2d3b35630~tplv-k3u1fbpfcp-watermark.image?)
+![3e4af0.png](https://cdn.j10ccc.xyz/static/blog/3e4af0.png)
 
 - 我实现的结果条目截图
-![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb89f9732c3e420c9d50a91fba115c14~tplv-k3u1fbpfcp-watermark.image?)
+![eb89f9.png](https://cdn.j10ccc.xyz/static/blog/eb89f9.png)
 
 ## 后端返回数据样例
 

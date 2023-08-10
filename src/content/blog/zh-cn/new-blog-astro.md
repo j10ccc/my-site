@@ -21,7 +21,7 @@ Astro 官方文档有一篇完整的构建博客教程，按照教程一步步�
 
 我选择的是 SSG 构建，当然 Astro 也支持 SSR。得益于静态路由映射，全站包括文章页，首页的性能都很好，Lighthouse 的 Performance 和 SEO 分数都能打满。
 
-![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/19b748178c274357ba3ea3b84e8750cb~tplv-k3u1fbpfcp-watermark.image?)
+![lighthouse.png](https://cdn.j10ccc.xyz/static/blog/fFO5eS.png)
 
 ## 提一嘴
 

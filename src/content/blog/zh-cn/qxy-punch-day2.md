@@ -73,9 +73,9 @@ tags: ["git"]
    commit 附加的信息是用自己的话来描述你此次提交修改干了啥，虽然是自己输入，但在团队开发中最好要有个[规范](https://www.jianshu.com/p/201bd81e7dc9)
     > commit 无结尾引号时，在结尾输入换行符会到下一行继续输入 commit，直到输入结尾引号再回车就能完成 commit
 
-![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f2402785d94145cc996b5027c112f38f~tplv-k3u1fbpfcp-watermark.image?)
+![f24027.png](https://cdn.j10ccc.xyz/static/blog/f24027.png)
 
-![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/81a9afe01a5143669c2f1c6e18dcd3ad~tplv-k3u1fbpfcp-watermark.image?)
+![81a9af.png](https://cdn.j10ccc.xyz/static/blog/81a9af.png)
     
     
 4. 查看 / 添加 / 切换分支
@@ -162,7 +162,7 @@ git tag $version_string
 2. 一个 feature 的开发需要多次 commit，但是将这么多的 commit 合并到主分支时显得有点繁琐，在主分支下可以合并多次的提交信息为一条 commit，当然 feat 分支仍然保存着每次 commit 的具体内容
 3. 将没用的 merge commit 隐藏掉
 
-[![jym56J.png](https://s1.ax1x.com/2022/07/10/jym56J.png)](https://imgtu.com/i/jym56J)
+![jym56J.png](https://cdn.j10ccc.xyz/static/blog/jym56J.png)
 如图所示，我想要将`d576d7b` ~ `36f5e7e`这几次 commit 合并成一条 commit，则需要选择`36f5e7e`的前一条 commit `cb759ee`
 > 注意，这些 commit 按照提交时间顺序排序，选择的那条 commit 一定是这几条中提交时间最早的
 
@@ -175,4 +175,4 @@ git rebase -i cb759ee
 
 VSCode 上有 [Git graph](https://github.com/mhutchie/vscode-git-graph) 插件，可以直观的检查该项目的所有提交记录，分支信息，远程库，Tags等
 
-[![jyEg2j.png](https://s1.ax1x.com/2022/07/10/jyEg2j.png)](https://imgtu.com/i/jyEg2j)
+![jyEg2j.png](https://cdn.j10ccc.xyz/static/blog/jyEg2j.png)
