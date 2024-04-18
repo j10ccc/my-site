@@ -20,13 +20,18 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const allCollections = await getLanguageCollections();
+const inorderedByDate = allCollections.sort((a, b) => {
+  const postA = a.posts["zh-cn"] || a.posts.en;
+  const postB = b.posts["zh-cn"] || b.posts.en;
+  return new Date(postB!.meta.pubDate).getTime() - new Date(postA!.meta.pubDate).getTime();
+})
 ---
 
 <BaseLayout title="Blog" lang={ lang }>
   <main>
     <p class="slogan">{ t("blog.slogan") }</p>
     <div class="list">
-      {allCollections.map((collection) => (
+      {inorderedByDate.map((collection) => (
         <PostPreview {collection} />
       ))}
     </div>
