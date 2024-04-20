@@ -4,6 +4,7 @@ import PostPreview from "@components/PostPreview.astro";
 import type { Languages } from "@interfaces/i18n";
 import { useTranslations } from "@hooks/i18n/useTranslations";
 import { getLanguageCollections } from "@utils/languageCollection";
+import type { LanguageCollection } from "@interfaces/post";
 
 export interface Props {
 	lang: Languages;
@@ -20,21 +21,31 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const allCollections = await getLanguageCollections();
-const inorderedByDate = allCollections.sort((a, b) => {
+allCollections.sort((a, b) => {
   const postA = a.posts["zh-cn"] || a.posts.en;
   const postB = b.posts["zh-cn"] || b.posts.en;
   return new Date(postB!.meta.pubDate).getTime() - new Date(postA!.meta.pubDate).getTime();
 })
+const packedByYear = new Map<number, LanguageCollection[]>();
+for (const collection of allCollections) {
+  const year = collection.posts["zh-cn"]?.meta.pubDate.getFullYear() || 2099;
+  if (!packedByYear.has(year)) packedByYear.set(year, []);
+  packedByYear.get(year)?.push(collection);
+}
 ---
 
 <BaseLayout title="Blog" lang={ lang }>
   <main>
     <p class="slogan">{ t("blog.slogan") }</p>
-    <div class="list">
-      {inorderedByDate.map((collection) => (
-        <PostPreview {collection} />
-      ))}
-    </div>
+    { Array.from(packedByYear.entries())
+      .map(([year, collection]) => (
+        <ul class="post-list" data-year={year}>
+          {collection.map((collection) => (
+            <PostPreview {collection} />
+          ))}
+        </ul>
+      )
+    )}
   </main>
 </BaseLayout>
 
@@ -46,7 +57,21 @@ main {
 .slogan {
   font-family: "IBM Plex Sans", sans-serif;
 }
-.list {
-  padding: 0 1rem;
+.post-list {
+  position: relative;
+  font-family: "IBM Plex Sans", sans-serif;
+  &::before {
+    content: attr(data-year);
+    opacity: .1;
+    font-weight: bold;
+    font-size: 2rem;
+    @media (max-width: 576px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    padding: 0 1rem;
+  }
 }
 </style>

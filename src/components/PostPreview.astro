@@ -6,79 +6,43 @@ import PostLanguageLink from "./PostLanguageLink.astro";
 
 export interface Props {
   collection: LanguageCollection;
-  hightlightTag?: string;
 }
 
-const { collection, hightlightTag } = Astro.props;
+const { collection, } = Astro.props;
 const { lang } = Astro.params;
 
 const data = parseCollection(collection, lang as Languages);
 
 ---
 
-<div class="post-preview">
-  { data.post.meta.tags?.length &&
-    <div class="tags">
-      { data.post.meta.tags?.map(tag => (
-        <span class:list={
-          ["tag", tag.toUpperCase() === hightlightTag?.toUpperCase() && "highlight"]
-        }>
-          <a href={`/${lang}/tags/${tag}`}> {tag.toUpperCase()} </a>
-        </span>
-      ))}
-    </div>
-  }
-  <div style="display: flex; gap: 8px">
-    <div class="title">
-      <a href={`/${lang}/blog/${data.post.url}`}>
-        { data.post.meta.title }
-      </a>
-    </div>
-    <PostLanguageLink locale={lang || ""} languages={data.languages} />
-  </div>
+<li class="post-list-item">
   <div class="date">{ new Date(data.post.meta.pubDate).toLocaleDateString(lang) }</div>
-  { data.post.meta.description &&
-    <div class="description"> { data.post.meta.description } </div>
-  }
-</div>
+  <a class="title" href={`/${lang}/blog/${data.post.url}`}>
+    { data.post.meta.title }
+  </a>
+</li>
 
 <style lang="less">
-.post-preview {
-  margin-top: 36px;
+.post-list-item {
+  display: flex;
+  align-items: baseline;
 }
 .title {
   font-family: 'Crete Round', sans-serif;
-  font-size: 1.1rem;
-  a {
-    color: var(--stone-red-7);
-    text-decoration: none;
-  }
-}
-.tags {
-  display: flex;
-  font-size: .9rem;
-  gap: 4px;
-  .tag {
-    padding: 2px 0;
-    border-radius: 6px;
-    transition: .3s all;
-    font-family: 'Crete Round', sans-serif;
-    a {
-      color: #000000cc;
-      text-decoration: none;
-    }
-    &:hover {
-      background-color: var(--stone-green-1);
-    }
-  }
-  .tag.highlight {
-    background-color: var(--stone-green-1);
-  }
+  line-height: 170%;
+  margin-left: .8rem;
+  color: var(--stone-red-7);
+  text-decoration: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .date {
+  flex: 20% 0;
   font-family: "IBM Plex Sans", sans-serif;
-  opacity: .8;
+  opacity: .5;
   font-size: .9rem;
+  text-align: end;
 }
 .description {
   margin-top: 6px;
