@@ -6,5 +6,6 @@ export default defineConfig({
     shikiConfig: {
       theme: "github-light"
     }
-  }
+  },
+  site: "https://site.j10ccc.xyz"
 });

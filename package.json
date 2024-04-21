@@ -11,7 +11,7 @@
     "lint": "eslint --ext .js,.astro src"
   },
   "dependencies": {
-    "@astrojs/rss": "^2.4.3",
+    "@astrojs/rss": "^4.0.5",
     "astro": "^4.4.15"
   },
   "devDependencies": {
