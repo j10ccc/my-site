@@ -6,12 +6,15 @@ import type { Languages } from "@interfaces/i18n";
 export interface Props {
 	title?: string;
 	lang: Languages;
+	tdk?: string[];
 }
 
 const {
   title,
   lang
 } = Astro.props;
+
+const { tdk = [ title, "J10c's site" ] } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -21,7 +24,7 @@ const {
     <meta name="description" content="Astro description">
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title ? `${title} - ` : ""} J10c's site</title>
+    <title>{tdk.filter(Boolean).join(" - ")}</title>
   </head>
   <body>
   	<Header title={title} lang={lang} />
