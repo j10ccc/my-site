@@ -12,7 +12,8 @@ export const getLanguageCollections = async (): Promise<LanguageCollection[]> =>
       meta: item.data,
       url: `${slug.join("/")}-${language}`,
       language: language as Languages,
-      entry: item
+      entry: item,
+      content: item.body
     }
     const filename = slug.slice(-1)[0];
     if (!temp[filename]) temp[filename] = {};

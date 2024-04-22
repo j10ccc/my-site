@@ -2,6 +2,9 @@ import rss from "@astrojs/rss";
 import { Languages } from "@interfaces/i18n";
 import { getLanguageCollections, getPostsWithLanguage } from "@utils/languageCollection";
 import { defineMiddleware } from "astro:middleware";
+import MarkdownIt from 'markdown-it';
+
+const parser = new MarkdownIt();
 
 export async function getStaticPaths() {
   return [
@@ -23,6 +26,7 @@ export const GET = defineMiddleware(async (context) => {
       title: post.meta.title,
       pubDate: post.meta.pubDate,
       description: post.meta.description,
+      content: parser.render(post.content),
       link: `${lang}/blog/${post.entry.slug.split("/").slice(1).join("")}-${lang}`
     })),
   })

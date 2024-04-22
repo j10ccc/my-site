@@ -15,6 +15,7 @@ export interface Post {
   language: Languages;
   url: string;
   entry: CollectionEntry<"blog">;
+  content: string;
 }
 
 export interface Meta {
