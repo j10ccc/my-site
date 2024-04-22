@@ -62,7 +62,7 @@ const t = useTranslations(lang);
       <div class="grid">
         {withLanguage.map((item) => (
           <div class="item">
-            <a class="title" href={`blog/${item.post.url}`}>{item.post.meta.title}</span>
+            <a class="title" href={`blog/${item.post.url}`}>{item.post.meta.title}</a>
             <PostLanguageLink locale={lang} languages={item.languages} omit={[lang]} />
             <span style="flex: auto"></span>
             <span class="date">
