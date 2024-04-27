@@ -63,7 +63,7 @@ const generateNav = (collection: LanguageCollection | undefined, lang: Languages
     }
   }
 }
- 
+
 const nextNav = generateNav(next, postLang);
 const previousNav = generateNav(previous, postLang);
 
@@ -72,3 +72,5 @@ const { Content } = await page.render();
 
 <Content />
 <PostNav next={nextNav} previous={previousNav} />
+
+<script src="@scripts/vim-mode/post-scroll.ts"></script>
