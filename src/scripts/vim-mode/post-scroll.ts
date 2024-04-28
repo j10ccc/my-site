@@ -1,22 +1,43 @@
-let isScrolling = false; // 滚动状态标志
-const scrollAmount = 12; // 每次滚动的像素值
+import VimModeKeyHandler from "./key-handler";
+
+let isScrolling = false;
+const scrollAmount = 12;
 const scrollInterval = 16;
-let scrollTimer: number; // 定时器
+let scrollTimer: number;
 
-document.addEventListener("keydown", function(event) {
-  if (event.key === "j" || event.key === "k") {
-    if (!isScrolling) {
-      isScrolling = true;
-      scrollTimer = setInterval(() => {
-        window.scrollBy(0, scrollAmount * (event.key === "j" ? 1 : -1));
-      }, scrollInterval);
-    }
+function handleScroll(direction: "up" | "down") {
+  if (!isScrolling) {
+    isScrolling = true;
+    scrollTimer = setInterval(() => {
+      window.scrollBy(0, scrollAmount * (direction=== "down" ? 1 : -1));
+    }, scrollInterval);
   }
-});
+}
 
-document.addEventListener('keyup', function(event) {
-  if ((event.key === "j" || event.key === "k")&& isScrolling) {
-    clearInterval(scrollTimer);
-    isScrolling = false;
+function handleStopScroll() {
+  if (isScrolling) {
+    clearInterval(scrollTimer)
+    isScrolling = false
   }
-});
+}
+
+function handleLeap(to: "top" | "end") {
+  if (to === "top") {
+    window.scrollTo(0, -document.body.scrollHeight);
+  } else if (to === "end") {
+    window.scrollTo(0, document.body.scrollHeight)
+  }
+}
+
+const keyHandler = new VimModeKeyHandler();
+
+keyHandler.subscribe("j", () => handleScroll("down"), {
+  onKeyUp: handleStopScroll
+})
+keyHandler.subscribe("k", () => handleScroll("up"), {
+  onKeyUp: handleStopScroll
+})
+keyHandler.subscribe("gg", () => handleLeap("top"));
+keyHandler.subscribe("G", () => handleLeap("end"));
+
+keyHandler.start();
