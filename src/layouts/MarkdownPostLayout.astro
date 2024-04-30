@@ -1,8 +1,10 @@
 ---
 import type { Meta } from "@interfaces/post";
 import BaseLayout from "./BaseLayout.astro";
-import "@styles/markdown.less";
 import type { Languages } from "@interfaces/i18n";
+import "@styles/markdown.less";
+import "@fontsource/ibm-plex-sans/300.css";
+import "@fontsource/ibm-plex-sans/400.css";
 
 export interface Props {
   frontmatter: Meta;
@@ -55,7 +57,7 @@ const tdk = [frontmatter.title, "J10c's blog"];
         padding: 2px 0;
         border-radius: 6px;
         transition: 0.3s all;
-        font-family: "Crete Round", sans-serif;
+        font-family: var(--font-serif);
         a {
           color: #000000cc;
           text-decoration: none;
@@ -69,7 +71,7 @@ const tdk = [frontmatter.title, "J10c's blog"];
   .post-title {
     padding: 0 1rem;
     font-size: 1.6rem;
-    font-weight: 400;
-    font-family: var(--font-serif);
+    font-weight: 300;
+    font-family: var(--font-sans);
   }
 </style>

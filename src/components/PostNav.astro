@@ -14,7 +14,7 @@ const { next, previous } = Astro.props;
 
 <div class="navbar">
   { previous &&
-    <div class="item"> 
+    <div class="item">
       <a href={previous.link}>← { previous.label } </a>
     </div>
   }
@@ -22,7 +22,7 @@ const { next, previous } = Astro.props;
     <a href="#top">TOP</a>
   </div>
   { next &&
-    <div class="item"> 
+    <div class="item">
       <a href={next.link}> { next.label } →</a>
     </div>
   }
@@ -30,7 +30,7 @@ const { next, previous } = Astro.props;
 
 <style lang="less">
 .navbar {
-  font-family: 'Crete Round', sans-serif;
+  font-family: var(--font-retro);
   margin-top: 4rem;
   border-top: 1px solid gray;
   display: flex;

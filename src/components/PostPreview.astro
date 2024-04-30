@@ -2,7 +2,6 @@
 import type { Languages } from "@interfaces/i18n";
 import type { LanguageCollection } from "@interfaces/post";
 import { parseCollection } from "@utils/languageCollection";
-import PostLanguageLink from "./PostLanguageLink.astro";
 
 export interface Props {
   collection: LanguageCollection;
@@ -28,7 +27,7 @@ const data = parseCollection(collection, lang as Languages);
   align-items: baseline;
 }
 .title {
-  font-family: 'Crete Round', sans-serif;
+  font-family: var(--font-retro);
   line-height: 170%;
   margin-left: .8rem;
   color: var(--stone-red-7);
