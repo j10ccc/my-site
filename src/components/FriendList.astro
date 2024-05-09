@@ -1,0 +1,56 @@
+---
+interface Friend {
+  name: string;
+  alias: string;
+  link: string;
+}
+
+const friends: Array<Friend> = [
+  { name: "PatrickStarCN", alias: "认识的第一个后端🐷", link: "https://blog.cnpatrickstar.com" },
+  { name: "NodeSans", alias: "第一个教我前端的👶", link: "https://blog.node189.top" },
+  { name: "F1nley", alias: "爱好重叠度最高的👴", link: "https://blog.f1nley.xyz" },
+  { name: "papapatrick", alias: "最看好的前端练习生🤓", link: "https://www.papapatrick.tech" },
+]
+---
+<ul id="friend-list">
+  { friends.map(friend => (
+    <li class="friend">
+      <span>{ friend.name }</span>
+      <a href={friend.link} target="_blank">
+        { friend.alias }
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style lang="less">
+#friend-list {
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 576px) {
+    padding: 0 1rem;
+  }
+}
+
+li {
+  display: flex;
+  align-items: baseline;
+  span {
+    flex: 20% 0;
+    font-family: "IBM Plex Sans", sans-serif;
+    opacity: .5;
+    font-size: .9rem;
+    text-align: end;
+  }
+  a {
+    font-family: var(--font-retro);
+    margin-left: .8rem;
+    line-height: 170%;
+    color: var(--stone-red-7);
+    text-decoration: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+</style>

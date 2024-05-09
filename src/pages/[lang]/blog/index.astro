@@ -5,6 +5,7 @@ import type { Languages } from "@interfaces/i18n";
 import { useTranslations } from "@hooks/i18n/useTranslations";
 import { getLanguageCollections } from "@utils/languageCollection";
 import type { LanguageCollection } from "@interfaces/post";
+import FriendList from "@components/FriendList.astro";
 
 export interface Props {
 	lang: Languages;
@@ -36,26 +37,40 @@ for (const collection of allCollections) {
 
 <BaseLayout title="Blog" lang={ lang }>
   <main>
-    <p class="slogan">{ t("blog.slogan") }</p>
-    { Array.from(packedByYear.entries())
-      .map(([year, collection]) => (
-        <ul class="post-list" data-year={year}>
-          {collection.map((collection) => (
-            <PostPreview {collection} />
-          ))}
-        </ul>
-      )
-    )}
+    <section>
+      <p class="slogan desc">{ t("blog.slogan") }</p>
+      {Array.from(packedByYear.entries())
+        .map(([year, collection]) => (
+          <ul class="post-list" data-year={year}>
+            {collection.map((collection) => (
+              <PostPreview {collection} />
+            ))}
+          </ul>
+        )
+      )}
+    </section>
+    <section>
+      <p class="friends desc">{ t("blog.friends") }</p>
+      <FriendList />
+    </section>
   </main>
 </BaseLayout>
 
 <style lang="less">
 main {
   padding: 0 1rem 1rem 1rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
 }
-.slogan {
+section {
+  margin: 2rem 0;
+}
+.desc {
+  padding-left: 40px;
   font-family: "IBM Plex Sans", sans-serif;
+  @media (max-width: 576px) {
+    padding: 0 1rem;
+  }
 }
 .post-list {
   position: relative;
