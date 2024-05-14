@@ -2,6 +2,7 @@
 import type { Languages } from "@interfaces/i18n";
 import type { LanguageCollection } from "@interfaces/post";
 import { parseCollection } from "@utils/languageCollection";
+import { format } from "date-fns";
 
 export interface Props {
   collection: LanguageCollection;
@@ -15,7 +16,7 @@ const data = parseCollection(collection, lang as Languages);
 ---
 
 <li class="post-list-item">
-  <div class="date">{ new Date(data.post.meta.pubDate).toLocaleDateString(lang) }</div>
+  <div class="date">{ format(data.post.meta.pubDate, "MM/dd") }</div>
   <a class="title" href={`/${lang}/blog/${data.post.url}`}>
     { data.post.meta.title }
   </a>
@@ -38,7 +39,7 @@ const data = parseCollection(collection, lang as Languages);
 }
 .date {
   flex: 20% 0;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: var(--font-mono);
   opacity: .5;
   font-size: .9rem;
   text-align: end;
