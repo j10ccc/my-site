@@ -17,6 +17,10 @@ export const GET = defineMiddleware(async (context) => {
   const data = await getLanguageCollections();
   const lang = context.params.lang as Languages;
   const posts = getPostsWithLanguage(data, Languages[lang]);
+  const followMeta = {
+    feedId: "62033118826866689",
+    userId: "62125606033830912"
+  }
 
   return rss({
     title: "J10c's Blog",
@@ -29,5 +33,11 @@ export const GET = defineMiddleware(async (context) => {
       content: parser.render(post.content),
       link: `${lang}/blog/${post.entry.slug.split("/").slice(1).join("")}-${lang}`
     })),
+    customData: `
+<follow_challenge>
+    <feedId>${followMeta.feedId}</feedId>
+    <userId>${followMeta.userId}</userId>
+</follow_challenge>
+`
   })
 })
