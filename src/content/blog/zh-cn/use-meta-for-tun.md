@@ -6,6 +6,7 @@ pubDate: 2023-11-03
 tags:
   - linux
   - deploy
+  - raspberry pi
 ---
 最近几天 Clash 圈子里面闹的沸沸扬扬，我也是趁着风头给电脑换上了 meta 内核。Meta 我早就听说了，但是一直不知道有什么契机需要用 TUN 模式，这个星期我发现了一个合适的理由，下面来谈谈。
 
