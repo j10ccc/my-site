@@ -46,7 +46,7 @@ export async function getStaticPaths() {
       <h2>Posts tagged with</h2>
       <h2 class="tag">{tag?.toUpperCase()}</h2>
     </div>
-    <div class="list">
+    <ul class="list">
       {collections.map(collection => (
         <PostPreview collection={collection} />
       ))}
