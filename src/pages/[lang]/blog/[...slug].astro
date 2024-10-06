@@ -15,19 +15,20 @@ interface Props {
 
 export async function getStaticPaths() {
   const collections = await getLanguageCollections();
-  const allPost = collections
+  const sortedByDate = collections.sort((a, b) =>
+    new Date(b.posts["zh-cn"]!.entry.data.pubDate).getTime() - new Date(a.posts["zh-cn"]!.entry.data.pubDate).getTime()
+  );
+
+  // Flatten with languages
+  const allPosts = sortedByDate
     .map((collection, index) =>
       Object.values(collection.posts).map((post) => ({
         ...post,
         collectionIndex: index,
       }))
-    )
-    .flat();
+    ).flat();
 
-  const paths = allPost
-    .sort((a, b) =>
-      new Date(b.entry.data.pubDate).getTime() - new Date(a.entry.data.pubDate).getTime()
-    )
+  const paths = allPosts
     .map(page => {
       const [lang, ...slug] = page.entry.slug.split("/");
       return Object.keys(languages).map((languages) => {
@@ -36,8 +37,8 @@ export async function getStaticPaths() {
           props: {
             postLang: lang,
             page: page.entry,
-            next: collections[page.collectionIndex + 1],
-            previous: collections[page.collectionIndex - 1],
+            next: sortedByDate[page.collectionIndex + 1],
+            previous: sortedByDate[page.collectionIndex - 1],
           },
         };
       });
