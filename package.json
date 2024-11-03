@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint --ext .js,.astro src"
+    "lint": "eslint"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.5",
@@ -17,10 +17,13 @@
   "devDependencies": {
     "@fontsource/crete-round": "^5.0.5",
     "@fontsource/ibm-plex-sans": "^5.0.5",
-    "@typescript-eslint/parser": "^5.61.0",
+    "@j10c/eslint-config": "^0.5.3",
+    "@typescript-eslint/parser": "^5.62.0",
     "date-fns": "^3.6.0",
-    "eslint": "^8.44.0",
-    "eslint-plugin-astro": "^0.27.2",
+    "eslint": "^9.13.0",
+    "eslint-plugin-astro": "^1.3.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
     "less": "^4.1.3",
     "markdown-it": "^14.1.0"
   }

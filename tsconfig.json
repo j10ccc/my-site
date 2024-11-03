@@ -14,5 +14,9 @@
       "@i18n/*": ["src/i18n/*"],
       "@scripts/*": ["src/scripts/*"]
     }
-  }
+  },
+  "include": [
+    "src/",
+    "types/"
+  ]
 }
