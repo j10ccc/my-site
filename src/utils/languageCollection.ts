@@ -14,7 +14,7 @@ export const getLanguageCollections = async (): Promise<LanguageCollection[]> =>
       language: language as Languages,
       entry: item,
       content: item.body
-    }
+    };
     const filename = slug.slice(-1)[0];
     if (!temp[filename]) temp[filename] = {};
     temp[filename][language] = post;
@@ -25,11 +25,11 @@ export const getLanguageCollections = async (): Promise<LanguageCollection[]> =>
       return {
         name: key,
         posts: temp[key]
-      }
-    })
+      };
+    });
 
   return res;
-}
+};
 
 export const parseCollection = (collection: LanguageCollection, lang?: Languages) => {
   let post: Post;
@@ -46,11 +46,11 @@ export const parseCollection = (collection: LanguageCollection, lang?: Languages
     ]);
 
   return { post, languages };
-}
+};
 
 export const getPostsWithLanguage = (collections: LanguageCollection[], lang?: Languages) => {
   const withLanguage = collections.map(collection => {
     return parseCollection(collection, lang);
-  })
+  });
   return withLanguage;
-}
+};

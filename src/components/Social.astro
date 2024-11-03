@@ -1,6 +1,6 @@
 ---
 import type { Languages } from "@interfaces/i18n";
-import { useTranslations } from "@hooks/i18n/useTranslations";
+import createTranslation from "@i18n/createTranslation";
 
 export interface Props {
   lang: Languages
@@ -14,12 +14,12 @@ interface Social {
 
 const socialMedias: Social[] = [
   { label: "github", link: "https://github.com/j10ccc", color: "#202328" },
-  { label: "juejin", link: "https://juejin.cn/user/4367696392367191", color: "#3f7ef7" },
-]
+  { label: "juejin", link: "https://juejin.cn/user/4367696392367191", color: "#3f7ef7" }
+];
 
 const { lang } = Astro.props;
 
-const t = useTranslations(lang);
+const t = createTranslation(lang);
 
 ---
 

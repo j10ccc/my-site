@@ -27,12 +27,12 @@ export async function getStaticPaths() {
       return (target.post.meta.tags && tag !== undefined) &&
         target.post.meta.tags!
           .map(tag => tag.toUpperCase())
-          .includes(tag.toUpperCase())
-    })
+          .includes(tag.toUpperCase());
+    });
     return Object.keys(languages).map(language => ({
       params: { lang: language, tag: tag.toLowerCase() },
       props: { collections: filtered }
-    }))
+    }));
   }).flat();
 
   return routes;

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 interface Listener {
   cmd: string,
   callback: () => void
@@ -14,13 +15,13 @@ export default class VimModeKeyHandler {
   private stack: string[];
   private listeners: Array<Listener>;
   private eventHandler: EventHandler;
-  
+
   constructor() {
     if (window.__vim_mode_key_handler) {
-      console.warn("Vim mode key handler has existed in this page.")
+      console.warn("Vim mode key handler has existed in this page.");
     }
     window.__vim_mode_key_handler = this;
-    this.stack = []
+    this.stack = [];
     this.listeners = [];
     this.eventHandler = {
       keydown: (e) => {
@@ -34,7 +35,7 @@ export default class VimModeKeyHandler {
         let hasMatchedPrefix = false;
         for (const listener of this.listeners) {
           if (listener.cmd.startsWith(toMatch)) {
-            hasMatchedPrefix = true
+            hasMatchedPrefix = true;
             if (listener.cmd === toMatch) {
               listener.callback();
               this.endCmd();
@@ -42,24 +43,24 @@ export default class VimModeKeyHandler {
             }
           }
         }
-        if (!hasMatchedPrefix) this.endCmd()
+        if (!hasMatchedPrefix) this.endCmd();
       },
       keyup: (e) => {
         for (const listener of this.listeners) {
           if (typeof listener.onKeyUp === "function") listener.onKeyUp(e);
         }
       }
-    }
+    };
   }
 
   public start() {
-    document.addEventListener("keydown", this.eventHandler.keydown)
-    document.addEventListener("keyup", this.eventHandler.keyup)
+    document.addEventListener("keydown", this.eventHandler.keydown);
+    document.addEventListener("keyup", this.eventHandler.keyup);
   }
 
   public destroy() {
-    document.removeEventListener("keydown", this.eventHandler.keydown)
-    document.removeEventListener("keyup", this.eventHandler.keyup)
+    document.removeEventListener("keydown", this.eventHandler.keydown);
+    document.removeEventListener("keyup", this.eventHandler.keyup);
   }
 
   public subscribe(
@@ -69,10 +70,10 @@ export default class VimModeKeyHandler {
       onKeyUp?: () => void;
     } = {}
   ) {
-    this.listeners.push({ cmd, callback, ...options })
+    this.listeners.push({ cmd, callback, ...options });
   }
 
   public endCmd() {
-    this.stack = []
+    this.stack = [];
   }
 }

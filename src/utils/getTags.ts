@@ -2,8 +2,8 @@ import type { Post } from "@interfaces/post";
 
 /**
  * Get all unique tags.
- * 
- * @param allPosts 
+ *
+ * @param allPosts
  * @returns uppercase tags
  */
 const getTags = (allPosts: Post[]) => {
@@ -16,6 +16,6 @@ const getTags = (allPosts: Post[]) => {
   }).flat())];
 
   return uniqueTags;
-}
+};
 
 export default getTags;

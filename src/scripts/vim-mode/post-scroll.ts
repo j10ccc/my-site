@@ -16,8 +16,8 @@ function handleScroll(direction: "up" | "down") {
 
 function handleStopScroll() {
   if (isScrolling) {
-    clearInterval(scrollTimer)
-    isScrolling = false
+    clearInterval(scrollTimer);
+    isScrolling = false;
   }
 }
 
@@ -25,7 +25,7 @@ function handleLeap(to: "top" | "end") {
   if (to === "top") {
     window.scrollTo(0, -document.body.scrollHeight);
   } else if (to === "end") {
-    window.scrollTo(0, document.body.scrollHeight)
+    window.scrollTo(0, document.body.scrollHeight);
   }
 }
 
@@ -33,10 +33,10 @@ const keyHandler = new VimModeKeyHandler();
 
 keyHandler.subscribe("j", () => handleScroll("down"), {
   onKeyUp: handleStopScroll
-})
+});
 keyHandler.subscribe("k", () => handleScroll("up"), {
   onKeyUp: handleStopScroll
-})
+});
 keyHandler.subscribe("gg", () => handleLeap("top"));
 keyHandler.subscribe("G", () => handleLeap("end"));
 

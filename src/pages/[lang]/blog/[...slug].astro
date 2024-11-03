@@ -24,7 +24,7 @@ export async function getStaticPaths() {
     .map((collection, index) =>
       Object.values(collection.posts).map((post) => ({
         ...post,
-        collectionIndex: index,
+        collectionIndex: index
       }))
     ).flat();
 
@@ -38,8 +38,8 @@ export async function getStaticPaths() {
             postLang: lang,
             page: page.entry,
             next: sortedByDate[page.collectionIndex + 1],
-            previous: sortedByDate[page.collectionIndex - 1],
-          },
+            previous: sortedByDate[page.collectionIndex - 1]
+          }
         };
       });
     })
@@ -56,14 +56,14 @@ const generateNav = (collection: LanguageCollection | undefined, lang: Languages
     return {
       label: post.meta.title,
       link: post.url
-    }
+    };
   } else {
     return {
       label: "Blog",
       link: "./"
-    }
+    };
   }
-}
+};
 
 const nextNav = generateNav(next, postLang);
 const previousNav = generateNav(previous, postLang);

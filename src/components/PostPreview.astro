@@ -8,7 +8,7 @@ export interface Props {
   collection: LanguageCollection;
 }
 
-const { collection, } = Astro.props;
+const { collection } = Astro.props;
 const { lang } = Astro.params;
 
 const data = parseCollection(collection, lang as Languages);

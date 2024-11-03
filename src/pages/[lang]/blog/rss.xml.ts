@@ -2,7 +2,7 @@ import rss from "@astrojs/rss";
 import { Languages } from "@interfaces/i18n";
 import { getLanguageCollections, getPostsWithLanguage } from "@utils/languageCollection";
 import { defineMiddleware } from "astro:middleware";
-import MarkdownIt from 'markdown-it';
+import MarkdownIt from "markdown-it";
 
 const parser = new MarkdownIt();
 
@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   return [
     { params: { lang: "zh-cn" } },
     { params: { lang: "en" } }
-  ]
+  ];
 }
 
 export const GET = defineMiddleware(async (context) => {
@@ -20,7 +20,7 @@ export const GET = defineMiddleware(async (context) => {
   const followMeta = {
     feedId: "62033118826866689",
     userId: "62125606033830912"
-  }
+  };
 
   return rss({
     title: "J10c's Blog",
@@ -39,5 +39,5 @@ export const GET = defineMiddleware(async (context) => {
     <userId>${followMeta.userId}</userId>
 </follow_challenge>
 `
-  })
-})
+  });
+});

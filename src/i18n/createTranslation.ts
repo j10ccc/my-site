@@ -1,7 +1,7 @@
-import { ui, defaultLang } from "@i18n/ui";
+import { ui, defaultLang } from "./ui";
 
-export function useTranslations(lang: keyof typeof ui) {
+export default function createTranslation(lang: keyof typeof ui) {
   return function t(key: keyof typeof ui[typeof defaultLang]) {
     return ui[lang][key] || ui[defaultLang][key];
-  }
+  };
 }

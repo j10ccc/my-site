@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { useTranslations } from "@hooks/i18n/useTranslations";
+import createTranslation from "@i18n/createTranslation";
 import Social from "@components/Social.astro";
 import type { Languages } from "@interfaces/i18n";
 import Footer from "@components/Footer.astro";
@@ -14,7 +14,7 @@ export interface Props {
 export async function getStaticPaths() {
   return [
     { params: { lang: "zh-cn" }, props: { lang: "zh-cn" } },
-    { params: { lang: "en" }, props: { lang: "en" } },
+    { params: { lang: "en" }, props: { lang: "en" } }
   ];
 }
 
@@ -22,9 +22,9 @@ const { lang } = Astro.props;
 
 const collectionSlice = (await getLanguageCollections())
   .sort((a, b) => {
-    let postA = a.posts[lang] || Object.entries(a.posts)[0][1];
-    let postB = b.posts[lang] || Object.entries(b.posts)[0][1];
-    return new Date(postB.meta.pubDate).getTime() - new Date(postA.meta.pubDate).getTime()
+    const postA = a.posts[lang] || Object.entries(a.posts)[0][1];
+    const postB = b.posts[lang] || Object.entries(b.posts)[0][1];
+    return new Date(postB.meta.pubDate).getTime() - new Date(postA.meta.pubDate).getTime();
   })
   .slice(0, 5);
 
@@ -32,7 +32,7 @@ const withLanguage = getPostsWithLanguage(collectionSlice, lang);
 
 const projectSlice: any[] = [];
 
-const t = useTranslations(lang);
+const t = createTranslation(lang);
 ---
 
 <BaseLayout lang={lang}>
